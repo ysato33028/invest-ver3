@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人件費編集ページ</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>人件費編集ページ</h2>
+    <form id="personnel-edit-form">
+        <table>
+            <tbody>
+                <tr>
+                    <th>項目</th>
+                    <th>月額費用 (円)</th>
+                </tr>
+                <tr>
+                    <td>役員報酬</td>
+                    <td><input type="number" id="executiveCompensation" value="0"></td>
+                </tr>
+                <tr>
+                    <td>従業員給料</td>
+                    <td><input type="number" id="employeeSalary" value="249603"></td>
+                </tr>
+                <tr>
+                    <td>従業員賞与</td>
+                    <td><input type="number" id="employeeBonus" value="0"></td>
+                </tr>
+                <tr>
+                    <td>賞与引当金繰入額</td>
+                    <td><input type="number" id="bonusProvision" value="63905"></td>
+                </tr>
+                <tr>
+                    <td>出向者人件費負担金</td>
+                    <td><input type="number" id="secondedEmployeeExpense" value="0"></td>
+                </tr>
+                <tr>
+                    <td>出向者人件費負担受入</td>
+                    <td><input type="number" id="secondedEmployeeIncome" value="0"></td>
+                </tr>
+                <tr>
+                    <td>役員賞与引当金繰入</td>
+                    <td><input type="number" id="executiveBonusProvision" value="0"></td>
+                </tr>
+                <tr>
+                    <td>関係会社出向者</td>
+                    <td><input type="number" id="relatedCompanySecondedEmployee" value="0"></td>
+                </tr>
+                <tr>
+                    <td>フレックス社員等給料</td>
+                    <td><input type="number" id="flexEmployeeSalary" value="1129755"></td>
+                </tr>
+                <tr>
+                    <td>退職金</td>
+                    <td><input type="number" id="retirementBenefit" value="0"></td>
+                </tr>
+                <tr>
+                    <td>退職給付費用</td>
+                    <td><input type="number" id="retirementBenefitCost" value="2900"></td>
+                </tr>
+                <tr>
+                    <td>役員退職慰労引当繰入</td>
+                    <td><input type="number" id="executiveRetirementAllowance" value="0"></td>
+                </tr>
+                <tr>
+                    <td>法定福利費</td>
+                    <td><input type="number" id="statutoryWelfareCost" value="251204"></td>
+                </tr>
+                <tr>
+                    <td>福利厚生費</td>
+                    <td><input type="number" id="employeeWelfareCost" value="58400"></td>
+                </tr>
+                <tr>
+                    <td>採用費</td>
+                    <td><input type="number" id="recruitCost" value="0"></td>
+                </tr>
+                <tr>
+                    <td>教育費</td>
+                    <td><input type="number" id="trainingCost" value="0"></td>
+                </tr>
+                <tr>
+                    <td>寮及び社宅費</td>
+                    <td><input type="number" id="dormitoryCost" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="total-container">
+            <span>月額計:(円)</span>
+            <span id="total-value">0</span>
+        </div>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="calculate-total-button">合計を計算</button>
+        <button class="btn-save" type="button" id="save-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>s
+    </form>
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        // Firebaseの初期化
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // URLからidパラメータを取得
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const propertyId = getQueryParam('id');
+
+        // 合計金額を計算して表示する
+        document.getElementById("calculate-total-button").addEventListener("click", () => {
+            let personnel = 0;
+            const fields = [
+                "executiveCompensation",
+                "employeeSalary",
+                "employeeBonus",
+                "bonusProvision",
+                "secondedEmployeeExpense",
+                "secondedEmployeeIncome",
+                "executiveBonusProvision",
+                "relatedCompanySecondedEmployee",
+                "flexEmployeeSalary",
+                "retirementBenefit",
+                "retirementBenefitCost",
+                "executiveRetirementAllowance",
+                "statutoryWelfareCost",
+                "employeeWelfareCost",
+                "recruitCost",
+                "trainingCost",
+                "dormitoryCost"
+            ];
+
+            fields.forEach(fieldId => {
+                const value = Number(document.getElementById(fieldId).value) || 0;
+                personnel += value;
+            });
+
+            document.getElementById("total-value").textContent = personnel.toLocaleString(); // カンマ区切りで表示
+            return personnel;
+        });
+
+        // フォームの入力をFirebaseに保存
+        document.getElementById("save-button").addEventListener("click", async () => {
+            if (confirm(`物件情報を更新しますか？`)) {
+                try {
+                    if (propertyId) {
+                        const docRef = doc(db, "properties", propertyId);
+
+                        // 更新するデータをオブジェクトにまとめる
+                        const updateData = {
+                            executiveCompensation: Number(document.getElementById("executiveCompensation").value),
+                            employeeSalary: Number(document.getElementById("employeeSalary").value),
+                            employeeBonus: Number(document.getElementById("employeeBonus").value),
+                            bonusProvision: Number(document.getElementById("bonusProvision").value),
+                            secondedEmployeeExpense: Number(document.getElementById("secondedEmployeeExpense").value),
+                            secondedEmployeeIncome: Number(document.getElementById("secondedEmployeeIncome").value),
+                            executiveBonusProvision: Number(document.getElementById("executiveBonusProvision").value),
+                            relatedCompanySecondedEmployee: Number(document.getElementById("relatedCompanySecondedEmployee").value),
+                            flexEmployeeSalary: Number(document.getElementById("flexEmployeeSalary").value),
+                            retirementBenefit: Number(document.getElementById("retirementBenefit").value),
+                            retirementBenefitCost: Number(document.getElementById("retirementBenefitCost").value),
+                            executiveRetirementAllowance: Number(document.getElementById("executiveRetirementAllowance").value),
+                            statutoryWelfareCost: Number(document.getElementById("statutoryWelfareCost").value),
+                            employeeWelfareCost: Number(document.getElementById("employeeWelfareCost").value),
+                            recruitCost: Number(document.getElementById("recruitCost").value),
+                            trainingCost: Number(document.getElementById("trainingCost").value),
+                            dormitoryCost: Number(document.getElementById("dormitoryCost").value),
+
+                            // 年間の人件費として保存 (月額の合計を12倍)
+                            personnel: Number(document.getElementById("total-value").textContent.replace(/,/g, '')) * 12
+                        };
+
+                        // Firebaseドキュメントを更新
+                        await updateDoc(docRef, updateData);
+                        alert("物件情報が更新されました。");
+                    } else {
+                        alert("物件IDが見つかりませんでした。");
+                    }
+                } catch (error) {
+                    console.error("エラーが発生しました:", error);
+                    alert("更新中にエラーが発生しました。");
+                }
+            }
+        });
+
+        // データの初期読み込み
+        async function loadData() {
+            if (propertyId) {
+                try {
+                    const docRef = doc(db, "properties", propertyId);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+
+                        document.getElementById("executiveCompensation").value = data.executiveCompensation || 0;
+                        document.getElementById("employeeSalary").value = data.employeeSalary || 0;
+                        document.getElementById("employeeBonus").value = data.employeeBonus || 0;
+                        document.getElementById("bonusProvision").value = data.bonusProvision || 0;
+                        document.getElementById("secondedEmployeeExpense").value = data.secondedEmployeeExpense || 0;
+                        document.getElementById("secondedEmployeeIncome").value = data.secondedEmployeeIncome || 0;
+                        document.getElementById("executiveBonusProvision").value = data.executiveBonusProvision || 0;
+                        document.getElementById("relatedCompanySecondedEmployee").value = data.relatedCompanySecondedEmployee || 0;
+                        document.getElementById("flexEmployeeSalary").value = data.flexEmployeeSalary || 0;
+                        document.getElementById("retirementBenefit").value = data.retirementBenefit || 0;
+                        document.getElementById("retirementBenefitCost").value = data.retirementBenefitCost || 0;
+                        document.getElementById("executiveRetirementAllowance").value = data.executiveRetirementAllowance || 0;
+                        document.getElementById("statutoryWelfareCost").value = data.statutoryWelfareCost || 0;
+                        document.getElementById("employeeWelfareCost").value = data.employeeWelfareCost || 0;
+                        document.getElementById("recruitCost").value = data.recruitCost || 0;
+                        document.getElementById("trainingCost").value = data.trainingCost || 0;
+                        document.getElementById("dormitoryCost").value = data.dormitoryCost || 0;
+
+                        // 合計金額の計算
+                        document.getElementById("calculate-total-button").click();
+                    } else {
+                        console.log("物件情報が見つかりませんでした。");
+                    }
+                } catch (error) {
+                    console.error("データ読み込みエラー:", error);
+                }
+            }
+        }
+
+        // ページ読み込み時にデータを読み込む
+        loadData();
+    </script>
+</body>
+</html>

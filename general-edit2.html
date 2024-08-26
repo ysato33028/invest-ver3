@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一般費編集ページ</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>一般費編集ページ（2年目）</h2>
+    <form id="general-edit-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>指数設定及び各部署負担 (%)</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 各項目の行 -->
+                <tr>
+                    <td>旅費交通費</td>
+                    <td><input type="number" id="travelExpenseRate" value="0.018" step="0.1"></td>
+                    <td id="travelExpense13">0</td>
+                    <td id="travelExpense14">0</td>
+                    <td id="travelExpense15">0</td>
+                    <td id="travelExpense16">0</td>
+                    <td id="travelExpense17">0</td>
+                    <td id="travelExpense18">0</td>
+                    <td id="travelExpense19">0</td>
+                    <td id="travelExpense20">0</td>
+                    <td id="travelExpense21">0</td>
+                    <td id="travelExpense22">0</td>
+                    <td id="travelExpense23">0</td>
+                    <td id="travelExpense24">0</td>
+                </tr>
+                <tr>
+                    <td>接待交際費</td>
+                    <td><input type="hidden" id="entertainmentExpenseRate"></td>
+                    <td id="entertainmentExpense13">0</td>
+                    <td id="entertainmentExpense14">0</td>
+                    <td id="entertainmentExpense15">0</td>
+                    <td id="entertainmentExpense16">0</td>
+                    <td id="entertainmentExpense17">0</td>
+                    <td id="entertainmentExpense18">0</td>
+                    <td id="entertainmentExpense19">0</td>
+                    <td id="entertainmentExpense20">0</td>
+                    <td id="entertainmentExpense21">0</td>
+                    <td id="entertainmentExpense22">0</td>
+                    <td id="entertainmentExpense23">0</td>
+                    <td id="entertainmentExpense24">0</td>
+                </tr>
+                <tr>
+                    <td>通信費</td>
+                    <td><input type="number" id="communicationCostRate" value="0.066" step="0.1"></td>
+                    <td id="communicationCost13">0</td>
+                    <td id="communicationCost14">0</td>
+                    <td id="communicationCost15">0</td>
+                    <td id="communicationCost16">0</td>
+                    <td id="communicationCost17">0</td>
+                    <td id="communicationCost18">0</td>
+                    <td id="communicationCost19">0</td>
+                    <td id="communicationCost20">0</td>
+                    <td id="communicationCost21">0</td>
+                    <td id="communicationCost22">0</td>
+                    <td id="communicationCost23">0</td>
+                    <td id="communicationCost24">0</td>
+                </tr>
+                <tr>
+                    <td>公租公課</td>
+                    <td><input type="number" id="publicTaxRate" value="0.055" step="0.1"></td>
+                    <td id="publicTax13">0</td>
+                    <td id="publicTax14">0</td>
+                    <td id="publicTax15">0</td>
+                    <td id="publicTax16">0</td>
+                    <td id="publicTax17">0</td>
+                    <td id="publicTax18">0</td>
+                    <td id="publicTax19">0</td>
+                    <td id="publicTax20">0</td>
+                    <td id="publicTax21">0</td>
+                    <td id="publicTax22">0</td>
+                    <td id="publicTax23">0</td>
+                    <td id="publicTax24">0</td>
+                </tr>
+                <tr>
+                    <td>調査研究費</td>
+                    <td><input type="hidden" id="researchCostRate"></td>
+                    <td id="researchCost13">0</td>
+                    <td id="researchCost14">0</td>
+                    <td id="researchCost15">0</td>
+                    <td id="researchCost16">0</td>
+                    <td id="researchCost17">0</td>
+                    <td id="researchCost18">0</td>
+                    <td id="researchCost19">0</td>
+                    <td id="researchCost20">0</td>
+                    <td id="researchCost21">0</td>
+                    <td id="researchCost22">0</td>
+                    <td id="researchCost23">0</td>
+                    <td id="researchCost24">0</td>
+                </tr>
+                <tr>
+                    <td>事務用消耗品費</td>
+                    <td><input type="number" id="officeSuppliesCostRate" value="0.311" step="0.1"></td>
+                    <td id="officeSuppliesCost13">0</td>
+                    <td id="officeSuppliesCost14">0</td>
+                    <td id="officeSuppliesCost15">0</td>
+                    <td id="officeSuppliesCost16">0</td>
+                    <td id="officeSuppliesCost17">0</td>
+                    <td id="officeSuppliesCost18">0</td>
+                    <td id="officeSuppliesCost19">0</td>
+                    <td id="officeSuppliesCost20">0</td>
+                    <td id="officeSuppliesCost21">0</td>
+                    <td id="officeSuppliesCost22">0</td>
+                    <td id="officeSuppliesCost23">0</td>
+                    <td id="officeSuppliesCost24">0</td>
+                </tr>
+                <tr>
+                    <td>損害保険料</td>
+                    <td><input type="number" id="insuranceFeeRate" value="0.030" step="0.1"></td>
+                    <td id="insuranceFee13">0</td>
+                    <td id="insuranceFee14">0</td>
+                    <td id="insuranceFee15">0</td>
+                    <td id="insuranceFee16">0</td>
+                    <td id="insuranceFee17">0</td>
+                    <td id="insuranceFee18">0</td>
+                    <td id="insuranceFee19">0</td>
+                    <td id="insuranceFee20">0</td>
+                    <td id="insuranceFee21">0</td>
+                    <td id="insuranceFee22">0</td>
+                    <td id="insuranceFee23">0</td>
+                    <td id="insuranceFee24">0</td>
+                </tr>
+                <tr>
+                    <td>寄付金</td>
+                    <td><input type="hidden" id="donationRate"></td>
+                    <td id="donation13">0</td>
+                    <td id="donation14">0</td>
+                    <td id="donation15">0</td>
+                    <td id="donation16">0</td>
+                    <td id="donation17">0</td>
+                    <td id="donation18">0</td>
+                    <td id="donation19">0</td>
+                    <td id="donation20">0</td>
+                    <td id="donation21">0</td>
+                    <td id="donation22">0</td>
+                    <td id="donation23">0</td>
+                    <td id="donation24">0</td>
+                </tr>
+                <tr>
+                    <td>報酬及び料金</td>
+                    <td><input type="hidden" id="rewardFeeRate"></td>
+                    <td id="rewardFee13">0</td>
+                    <td id="rewardFee14">0</td>
+                    <td id="rewardFee15">0</td>
+                    <td id="rewardFee16">0</td>
+                    <td id="rewardFee17">0</td>
+                    <td id="rewardFee18">0</td>
+                    <td id="rewardFee19">0</td>
+                    <td id="rewardFee20">0</td>
+                    <td id="rewardFee21">0</td>
+                    <td id="rewardFee22">0</td>
+                    <td id="rewardFee23">0</td>
+                    <td id="rewardFee24">0</td>
+                </tr>
+                <tr>
+                    <td>本社経費負担金</td>
+                    <td><input type="number" id="hqExpenseBurdenRate" value="0.043" step="0.1"></td>
+                    <td id="hqExpenseBurden13">0</td>
+                    <td id="hqExpenseBurden14">0</td>
+                    <td id="hqExpenseBurden15">0</td>
+                    <td id="hqExpenseBurden16">0</td>
+                    <td id="hqExpenseBurden17">0</td>
+                    <td id="hqExpenseBurden18">0</td>
+                    <td id="hqExpenseBurden19">0</td>
+                    <td id="hqExpenseBurden20">0</td>
+                    <td id="hqExpenseBurden21">0</td>
+                    <td id="hqExpenseBurden22">0</td>
+                    <td id="hqExpenseBurden23">0</td>
+                    <td id="hqExpenseBurden24">0</td>
+                </tr>
+                <tr>
+                    <td>本社経費負担金受入</td>
+                    <td><input type="hidden" id="hqExpenseAcceptanceRate"></td>
+                    <td id="hqExpenseAcceptance13">0</td>
+                    <td id="hqExpenseAcceptance14">0</td>
+                    <td id="hqExpenseAcceptance15">0</td>
+                    <td id="hqExpenseAcceptance16">0</td>
+                    <td id="hqExpenseAcceptance17">0</td>
+                    <td id="hqExpenseAcceptance18">0</td>
+                    <td id="hqExpenseAcceptance19">0</td>
+                    <td id="hqExpenseAcceptance20">0</td>
+                    <td id="hqExpenseAcceptance21">0</td>
+                    <td id="hqExpenseAcceptance22">0</td>
+                    <td id="hqExpenseAcceptance23">0</td>
+                    <td id="hqExpenseAcceptance24">0</td>
+                </tr>
+                                <tr>
+                    <td>関係会社経費負担金</td>
+                    <td><input type="hidden" id="relatedCompanyExpenseBurdenRate"></td>
+                    <td id="relatedCompanyExpenseBurden13">0</td>
+                    <td id="relatedCompanyExpenseBurden14">0</td>
+                    <td id="relatedCompanyExpenseBurden15">0</td>
+                    <td id="relatedCompanyExpenseBurden16">0</td>
+                    <td id="relatedCompanyExpenseBurden17">0</td>
+                    <td id="relatedCompanyExpenseBurden18">0</td>
+                    <td id="relatedCompanyExpenseBurden19">0</td>
+                    <td id="relatedCompanyExpenseBurden20">0</td>
+                    <td id="relatedCompanyExpenseBurden21">0</td>
+                    <td id="relatedCompanyExpenseBurden22">0</td>
+                    <td id="relatedCompanyExpenseBurden23">0</td>
+                    <td id="relatedCompanyExpenseBurden24">0</td>
+                </tr>
+                <tr>
+                    <td>販売支払手数料</td>
+                    <td><input type="hidden" id="salesCommissionRate"></td>
+                    <td id="salesCommission13">0</td>
+                    <td id="salesCommission14">0</td>
+                    <td id="salesCommission15">0</td>
+                    <td id="salesCommission16">0</td>
+                    <td id="salesCommission17">0</td>
+                    <td id="salesCommission18">0</td>
+                    <td id="salesCommission19">0</td>
+                    <td id="salesCommission20">0</td>
+                    <td id="salesCommission21">0</td>
+                    <td id="salesCommission22">0</td>
+                    <td id="salesCommission23">0</td>
+                    <td id="salesCommission24">0</td>
+                </tr>
+                <tr>
+                    <td>関係販売支払手数料</td>
+                    <td><input type="number" id="relatedSalesCommissionRate" value="0" step="0.1"></td>
+                    <td id="relatedSalesCommission13">0</td>
+                    <td id="relatedSalesCommission14">0</td>
+                    <td id="relatedSalesCommission15">0</td>
+                    <td id="relatedSalesCommission16">0</td>
+                    <td id="relatedSalesCommission17">0</td>
+                    <td id="relatedSalesCommission18">0</td>
+                    <td id="relatedSalesCommission19">0</td>
+                    <td id="relatedSalesCommission20">0</td>
+                    <td id="relatedSalesCommission21">0</td>
+                    <td id="relatedSalesCommission22">0</td>
+                    <td id="relatedSalesCommission23">0</td>
+                    <td id="relatedSalesCommission24">0</td>
+                </tr>
+                <tr>
+                    <td>貸倒損失</td>
+                    <td><input type="hidden" id="badDebtLossRate"></td>
+                    <td id="badDebtLoss13">0</td>
+                    <td id="badDebtLoss14">0</td>
+                    <td id="badDebtLoss15">0</td>
+                    <td id="badDebtLoss16">0</td>
+                    <td id="badDebtLoss17">0</td>
+                    <td id="badDebtLoss18">0</td>
+                    <td id="badDebtLoss19">0</td>
+                    <td id="badDebtLoss20">0</td>
+                    <td id="badDebtLoss21">0</td>
+                    <td id="badDebtLoss22">0</td>
+                    <td id="badDebtLoss23">0</td>
+                    <td id="badDebtLoss24">0</td>
+                </tr>
+                <tr>
+                    <td>貸倒引当金繰入</td>
+                    <td><input type="hidden" id="badDebtProvisionRate"></td>
+                    <td id="badDebtProvision13">0</td>
+                    <td id="badDebtProvision14">0</td>
+                    <td id="badDebtProvision15">0</td>
+                    <td id="badDebtProvision16">0</td>
+                    <td id="badDebtProvision17">0</td>
+                    <td id="badDebtProvision18">0</td>
+                    <td id="badDebtProvision19">0</td>
+                    <td id="badDebtProvision20">0</td>
+                    <td id="badDebtProvision21">0</td>
+                    <td id="badDebtProvision22">0</td>
+                    <td id="badDebtProvision23">0</td>
+                    <td id="badDebtProvision24">0</td>
+                </tr>
+                <tr>
+                    <td>雑費</td>
+                    <td><input type="number" id="miscellaneousExpenseRate" value="0.053" step="0.1"></td>
+                    <td id="miscellaneousExpense13">0</td>
+                    <td id="miscellaneousExpense14">0</td>
+                    <td id="miscellaneousExpense15">0</td>
+                    <td id="miscellaneousExpense16">0</td>
+                    <td id="miscellaneousExpense17">0</td>
+                    <td id="miscellaneousExpense18">0</td>
+                    <td id="miscellaneousExpense19">0</td>
+                    <td id="miscellaneousExpense20">0</td>
+                    <td id="miscellaneousExpense21">0</td>
+                    <td id="miscellaneousExpense22">0</td>
+                    <td id="miscellaneousExpense23">0</td>
+                    <td id="miscellaneousExpense24">0</td>
+                </tr>
+                <tr>
+                    <td>事業部経費負担金</td>
+                    <td><input type="number" id="businessUnitExpenseBurdenRate" value="0.012" step="0.1"></td>
+                    <td id="businessUnitExpenseBurden13">0</td>
+                    <td id="businessUnitExpenseBurden14">0</td>
+                    <td id="businessUnitExpenseBurden15">0</td>
+                    <td id="businessUnitExpenseBurden16">0</td>
+                    <td id="businessUnitExpenseBurden17">0</td>
+                    <td id="businessUnitExpenseBurden18">0</td>
+                    <td id="businessUnitExpenseBurden19">0</td>
+                    <td id="businessUnitExpenseBurden20">0</td>
+                    <td id="businessUnitExpenseBurden21">0</td>
+                    <td id="businessUnitExpenseBurden22">0</td>
+                    <td id="businessUnitExpenseBurden23">0</td>
+                    <td id="businessUnitExpenseBurden24">0</td>
+                </tr>
+                <tr>
+                    <td>商品部経費負担金</td>
+                    <td><input type="number" id="productDeptExpenseBurdenRate" value="0.008" step="0.1"></td>
+                    <td id="productDeptExpenseBurden13">0</td>
+                    <td id="productDeptExpenseBurden14">0</td>
+                    <td id="productDeptExpenseBurden15">0</td>
+                    <td id="productDeptExpenseBurden16">0</td>
+                    <td id="productDeptExpenseBurden17">0</td>
+                    <td id="productDeptExpenseBurden18">0</td>
+                    <td id="productDeptExpenseBurden19">0</td>
+                    <td id="productDeptExpenseBurden20">0</td>
+                    <td id="productDeptExpenseBurden21">0</td>
+                    <td id="productDeptExpenseBurden22">0</td>
+                    <td id="productDeptExpenseBurden23">0</td>
+                    <td id="productDeptExpenseBurden24">0</td>
+                </tr>
+                <tr>
+                    <td>一般費計</td>
+                    <td><input type="hidden"></td>
+                    <td id="total-generalMonthly13" value="0"></td>
+                    <td id="total-generalMonthly14" value="0"></td>
+                    <td id="total-generalMonthly15" value="0"></td>
+                    <td id="total-generalMonthly16" value="0"></td>
+                    <td id="total-generalMonthly17" value="0"></td>
+                    <td id="total-generalMonthly18" value="0"></td>
+                    <td id="total-generalMonthly19" value="0"></td>
+                    <td id="total-generalMonthly20" value="0"></td>
+                    <td id="total-generalMonthly21" value="0"></td>
+                    <td id="total-generalMonthly22" value="0"></td>
+                    <td id="total-generalMonthly23" value="0"></td>
+                    <td id="total-generalMonthly24" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="total-container">
+            <span>年間計:</span>
+            <span id="total-value">0</span>
+        </div>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="save-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>
+    </form>
+
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const propertyId = new URLSearchParams(window.location.search).get('id');
+        // 初期費用のデータ取得
+        let depreciation = 0; // 償却月数
+        // 旅費交通費
+        let displaySupport = 0; // 陳列応援経費
+        let preOpeningPersonnel = 0; // 開店前人件費
+
+        // 雑費
+        let depositInterest = 0; // 保証金金利額
+        let recruitmentCost = 0; // 採用費（会場・媒体）
+        let applicationFee = 0; // 各種申請料
+        let designFee = 0; // 設計料
+
+        async function loadSalesData() {
+            if (!propertyId) return;
+            const docRef = doc(db, "properties", propertyId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const salesData = [
+                    data.salesMonthly13, data.salesMonthly14, data.salesMonthly15,
+                    data.salesMonthly16, data.salesMonthly17, data.salesMonthly18,
+                    data.salesMonthly19, data.salesMonthly20, data.salesMonthly21,
+                    data.salesMonthly22, data.salesMonthly23, data.salesMonthly24
+                ];
+                // Firebaseから取得した値を変数に設定
+                if (data.depreciation) {
+                    depreciation = data.depreciation;
+                }
+
+                if (data.displaySupport) {
+                    displaySupport = data.displaySupport;
+                }
+                if (data.preOpeningPersonnel) {
+                    preOpeningPersonnel = data.preOpeningPersonnel;
+                }
+                if (data.depositInterest) {
+                    depositInterest = data.depositInterest;
+                }
+                if (data.recruitmentCost) {
+                    recruitmentCost = data.recruitmentCost;
+                }
+                
+                if (data.applicationFee) {
+                    applicationFee = data.applicationFee;
+                }
+                if (data.designFee) {
+                    designFee = data.designFee;
+                }
+                updateAllExpenses(salesData);
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        function calculateAndDisplayExpenses(expenseType, salesData) {
+            const rateInput = document.getElementById(`${expenseType}Rate`);
+            if (!rateInput) {
+                console.error(`Element with ID ${expenseType}Rate not found`);
+            }
+            const rate = rateInput ? Number(rateInput.value) / 100 : 0;
+
+            // 旅費交通費の計算
+            const travelExpense = displaySupport + preOpeningPersonnel;
+
+            // 雑費の計算
+            const miscellaneousExpense = depositInterest + recruitmentCost + applicationFee + designFee;
+
+            salesData.forEach((sales, index) => {
+                const month = index + 13;
+                let calculatedValue = sales * rate;
+
+                // その他
+                document.getElementById(`${expenseType}${month}`).innerText = calculatedValue.toFixed(0);
+            });
+
+            calculateTotal();
+        }
+
+
+        function setupExpenseCalculation() {
+            const expenseTypes = ["travelExpense", "miscellaneousExpense"];
+    
+            expenseTypes.forEach(expenseType => {
+                const element = document.getElementById(`${expenseType}Rate`);
+                if (element) { // nullチェックを追加
+                    element.addEventListener("change", () => updateExpenses(expenseType));
+                } else {
+                    console.error(`Element with ID ${expenseType}Rate not found`);
+                }
+            });
+        }
+
+        function updateAllExpenses(salesData) {
+            const expenseTypes = ["travelExpense", "entertainmentExpense", "communicationCost", "publicTax", "researchCost", "officeSuppliesCost", "insuranceFee", "donation", "rewardFee", "hqExpenseBurden", "hqExpenseAcceptance", "relatedCompanyExpenseBurden", "salesCommission", "relatedSalesCommission", "badDebtLoss", "badDebtProvision", "miscellaneousExpense", "businessUnitExpenseBurden", "productDeptExpenseBurden"];
+            expenseTypes.forEach(expenseType => {
+                setupExpenseCalculation(expenseType, salesData);
+                calculateAndDisplayExpenses(expenseType, salesData); // 初期計算
+            });
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            const expenseTypes = ["travelExpense", "entertainmentExpense", "communicationCost", "publicTax", "researchCost", "officeSuppliesCost", "insuranceFee", "donation", "rewardFee", "hqExpenseBurden", "hqExpenseAcceptance", "relatedCompanyExpenseBurden", "salesCommission", "relatedSalesCommission", "badDebtLoss", "badDebtProvision", "miscellaneousExpense", "businessUnitExpenseBurden", "productDeptExpenseBurden"];
+
+            // 各月の合計を保存するためのオブジェクト
+            const monthlyTotals = {};
+
+            // 1月から12月までの合計を計算
+            for (let i = 13; i <= 24; i++) {
+                let monthlyTotal = 0;
+                expenseTypes.forEach(expenseType => {
+                    const value = Number(document.getElementById(`${expenseType}${i}`).innerText) || 0;
+                    monthlyTotal += value;
+                });
+
+                // 各月の合計を保存
+                monthlyTotals[`total-generalMonthly${i}`] = monthlyTotal;
+
+                // 各月の合計を表示
+                document.getElementById(`total-generalMonthly${i}`).textContent = Math.trunc(monthlyTotal).toLocaleString();
+
+                // 総合計に各月の合計を加算
+                total += monthlyTotal;
+            }
+
+            // 総合計を表示
+            document.getElementById("total-value").textContent = Math.trunc(total).toLocaleString();
+
+            return monthlyTotals; // 月ごとの合計を返す
+        }
+
+        document.getElementById("save-button").addEventListener("click", async () => {
+            const updatedExpenses = {};
+            const expenseTypes = ["travelExpense", "entertainmentExpense", "communicationCost", "publicTax", "researchCost", "officeSuppliesCost", "insuranceFee", "donation", "rewardFee", "hqExpenseBurden", "hqExpenseAcceptance", "relatedCompanyExpenseBurden", "salesCommission", "relatedSalesCommission", "badDebtLoss", "badDebtProvision", "miscellaneousExpense", "businessUnitExpenseBurden", "productDeptExpenseBurden"];
+
+            // 月ごとの合計値を保存するオブジェクト
+            const monthlyTotals = calculateTotal(); // calculateTotal関数を呼び出し、月ごとの合計を取得
+
+            for (let i = 13; i <= 24; i++) {
+                let monthlyTotal = 0;
+                expenseTypes.forEach(expenseType => {
+                    const value = Number(document.getElementById(`${expenseType}${i}`).innerText) || 0;
+                    updatedExpenses[`${expenseType}${i}`] = value;
+                    monthlyTotal += value;
+                });
+                // 月ごとの合計を表示（既に calculateTotal 関数で行っているため、ここで再計算しなくてもOK）
+                monthlyTotals[`total-generalMonthly${i}`] = monthlyTotal; // 合計値をオブジェクトに保存
+            }
+
+            if (propertyId) {
+                const docRef = doc(db, "properties", propertyId);
+                const updateData = {
+                    general2: Number(document.getElementById("total-value").textContent.replace(/,/g, '')),
+                    ...monthlyTotals // 月ごとの合計値を一緒に保存
+                };
+
+                await updateDoc(docRef, updatedExpenses);
+                await updateDoc(docRef, updateData);
+                alert("データが保存されました。");
+            } else {
+                alert("プロパティIDが指定されていません。");
+            }
+        });
+
+
+        // エンターキーを無効化するイベントリスナー
+        document.getElementById("general-edit-form").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+            }
+        });
+
+        loadSalesData();
+    </script>
+</body>
+</html>

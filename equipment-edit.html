@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設備費編集ページ</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>設備費編集ページ（初年度）</h2>
+    <form id="equipment-edit-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>指数設定 (%)</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 各項目の行 -->
+                <tr>
+                    <td>水道光熱費</td>
+                    <td><input type="hidden" id="utilityCostRate"></td>
+                    <td id="utilityCost1">0</td>
+                    <td id="utilityCost2">0</td>
+                    <td id="utilityCost3">0</td>
+                    <td id="utilityCost4">0</td>
+                    <td id="utilityCost5">0</td>
+                    <td id="utilityCost6">0</td>
+                    <td id="utilityCost7">0</td>
+                    <td id="utilityCost8">0</td>
+                    <td id="utilityCost9">0</td>
+                    <td id="utilityCost10">0</td>
+                    <td id="utilityCost11">0</td>
+                    <td id="utilityCost12">0</td>
+                </tr>
+                <tr>
+                    <td>地代家賃</td>
+                    <td><input type="hidden" id="landRentRate"></td>
+                    <td id="landRent1">0</td>
+                    <td id="landRent2">0</td>
+                    <td id="landRent3">0</td>
+                    <td id="landRent4">0</td>
+                    <td id="landRent5">0</td>
+                    <td id="landRent6">0</td>
+                    <td id="landRent7">0</td>
+                    <td id="landRent8">0</td>
+                    <td id="landRent9">0</td>
+                    <td id="landRent10">0</td>
+                    <td id="landRent11">0</td>
+                    <td id="landRent12">0</td>
+                </tr>
+                <tr>
+                    <td>関係会社地代家賃</td>
+                    <td><input type="hidden" id="associatedCompanyLandRentRate"></td>
+                    <td id="associatedCompanyLandRent1">0</td>
+                    <td id="associatedCompanyLandRent2">0</td>
+                    <td id="associatedCompanyLandRent3">0</td>
+                    <td id="associatedCompanyLandRent4">0</td>
+                    <td id="associatedCompanyLandRent5">0</td>
+                    <td id="associatedCompanyLandRent6">0</td>
+                    <td id="associatedCompanyLandRent7">0</td>
+                    <td id="associatedCompanyLandRent8">0</td>
+                    <td id="associatedCompanyLandRent9">0</td>
+                    <td id="associatedCompanyLandRent10">0</td>
+                    <td id="associatedCompanyLandRent11">0</td>
+                    <td id="associatedCompanyLandRent12">0</td>
+                </tr>
+                <tr>
+                    <td>リース料</td>
+                    <td><input type="number" id="leaseFeeRate" value="0.068" step="0.1"></td>
+                    <td id="leaseFee1">0</td>
+                    <td id="leaseFee2">0</td>
+                    <td id="leaseFee3">0</td>
+                    <td id="leaseFee4">0</td>
+                    <td id="leaseFee5">0</td>
+                    <td id="leaseFee6">0</td>
+                    <td id="leaseFee7">0</td>
+                    <td id="leaseFee8">0</td>
+                    <td id="leaseFee9">0</td>
+                    <td id="leaseFee10">0</td>
+                    <td id="leaseFee11">0</td>
+                    <td id="leaseFee12">0</td>
+                </tr>
+                <tr>
+                    <td>店舗維持費</td>
+                    <td><input type="number" id="storeMaintenanceRate" value="1.798" step="0.1"></td>
+                    <td id="storeMaintenance1">0</td>
+                    <td id="storeMaintenance2">0</td>
+                    <td id="storeMaintenance3">0</td>
+                    <td id="storeMaintenance4">0</td>
+                    <td id="storeMaintenance5">0</td>
+                    <td id="storeMaintenance6">0</td>
+                    <td id="storeMaintenance7">0</td>
+                    <td id="storeMaintenance8">0</td>
+                    <td id="storeMaintenance9">0</td>
+                    <td id="storeMaintenance10">0</td>
+                    <td id="storeMaintenance11">0</td>
+                    <td id="storeMaintenance12">0</td>
+                </tr>
+                <tr>
+                    <td>修繕費</td>
+                    <td><input type="number" id="repairCostRate" value="0" step="0.1"></td>
+                    <td id="repairCost1">0</td>
+                    <td id="repairCost2">0</td>
+                    <td id="repairCost3">0</td>
+                    <td id="repairCost4">0</td>
+                    <td id="repairCost5">0</td>
+                    <td id="repairCost6">0</td>
+                    <td id="repairCost7">0</td>
+                    <td id="repairCost8">0</td>
+                    <td id="repairCost9">0</td>
+                    <td id="repairCost10">0</td>
+                    <td id="repairCost11">0</td>
+                    <td id="repairCost12">0</td>
+                </tr>
+                <tr>
+                    <td>消耗備品費</td>
+                    <td><input type="number" id="smallEquipmentCostRate" value="0.003" step="0.1"></td>
+                    <td id="smallEquipmentCost1">0</td>
+                    <td id="smallEquipmentCost2">0</td>
+                    <td id="smallEquipmentCost3">0</td>
+                    <td id="smallEquipmentCost4">0</td>
+                    <td id="smallEquipmentCost5">0</td>
+                    <td id="smallEquipmentCost6">0</td>
+                    <td id="smallEquipmentCost7">0</td>
+                    <td id="smallEquipmentCost8">0</td>
+                    <td id="smallEquipmentCost9">0</td>
+                    <td id="smallEquipmentCost10">0</td>
+                    <td id="smallEquipmentCost11">0</td>
+                    <td id="smallEquipmentCost12">0</td>
+                </tr>
+                <tr>
+                    <td>建物等減価償却費</td>
+                    <td><input type="hidden" id="buildingDepreciationRate"></td>
+                    <td id="buildingDepreciation1">0</td>
+                    <td id="buildingDepreciation2">0</td>
+                    <td id="buildingDepreciation3">0</td>
+                    <td id="buildingDepreciation4">0</td>
+                    <td id="buildingDepreciation5">0</td>
+                    <td id="buildingDepreciation6">0</td>
+                    <td id="buildingDepreciation7">0</td>
+                    <td id="buildingDepreciation8">0</td>
+                    <td id="buildingDepreciation9">0</td>
+                    <td id="buildingDepreciation10">0</td>
+                    <td id="buildingDepreciation11">0</td>
+                    <td id="buildingDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>車両器具減価償却費</td>
+                    <td><input type="hidden" id="vehicleEquipmentDepreciationRate"></td>
+                    <td id="vehicleEquipmentDepreciation1">0</td>
+                    <td id="vehicleEquipmentDepreciation2">0</td>
+                    <td id="vehicleEquipmentDepreciation3">0</td>
+                    <td id="vehicleEquipmentDepreciation4">0</td>
+                    <td id="vehicleEquipmentDepreciation5">0</td>
+                    <td id="vehicleEquipmentDepreciation6">0</td>
+                    <td id="vehicleEquipmentDepreciation7">0</td>
+                    <td id="vehicleEquipmentDepreciation8">0</td>
+                    <td id="vehicleEquipmentDepreciation9">0</td>
+                    <td id="vehicleEquipmentDepreciation10">0</td>
+                    <td id="vehicleEquipmentDepreciation11">0</td>
+                    <td id="vehicleEquipmentDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>資産除去債務償却</td>
+                    <td><input type="hidden" id="assetRemovalDebtDepreciationRate"></td>
+                    <td id="assetRemovalDebtDepreciation1">0</td>
+                    <td id="assetRemovalDebtDepreciation2">0</td>
+                    <td id="assetRemovalDebtDepreciation3">0</td>
+                    <td id="assetRemovalDebtDepreciation4">0</td>
+                    <td id="assetRemovalDebtDepreciation5">0</td>
+                    <td id="assetRemovalDebtDepreciation6">0</td>
+                    <td id="assetRemovalDebtDepreciation7">0</td>
+                    <td id="assetRemovalDebtDepreciation8">0</td>
+                    <td id="assetRemovalDebtDepreciation9">0</td>
+                    <td id="assetRemovalDebtDepreciation10">0</td>
+                    <td id="assetRemovalDebtDepreciation11">0</td>
+                    <td id="assetRemovalDebtDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>改装等設備償償却費</td>
+                    <td><input type="hidden" id="renovationEquipmentDepreciationRate"></td>
+                    <td id="renovationEquipmentDepreciation1">0</td>
+                    <td id="renovationEquipmentDepreciation2">0</td>
+                    <td id="renovationEquipmentDepreciation3">0</td>
+                    <td id="renovationEquipmentDepreciation4">0</td>
+                    <td id="renovationEquipmentDepreciation5">0</td>
+                    <td id="renovationEquipmentDepreciation6">0</td>
+                    <td id="renovationEquipmentDepreciation7">0</td>
+                    <td id="renovationEquipmentDepreciation8">0</td>
+                    <td id="renovationEquipmentDepreciation9">0</td>
+                    <td id="renovationEquipmentDepreciation10">0</td>
+                    <td id="renovationEquipmentDepreciation11">0</td>
+                    <td id="renovationEquipmentDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>共通内装工事負担受入</td>
+                    <td><input type="hidden" id="commonInteriorConstructionRate"></td>
+                    <td id="commonInteriorConstruction1">0</td>
+                    <td id="commonInteriorConstruction2">0</td>
+                    <td id="commonInteriorConstruction3">0</td>
+                    <td id="commonInteriorConstruction4">0</td>
+                    <td id="commonInteriorConstruction5">0</td>
+                    <td id="commonInteriorConstruction6">0</td>
+                    <td id="commonInteriorConstruction7">0</td>
+                    <td id="commonInteriorConstruction8">0</td>
+                    <td id="commonInteriorConstruction9">0</td>
+                    <td id="commonInteriorConstruction10">0</td>
+                    <td id="commonInteriorConstruction11">0</td>
+                    <td id="commonInteriorConstruction12">0</td>
+                </tr>
+                <tr>
+                    <td>設備償却費</td>
+                    <td><input type="hidden" id="equipmentDepreciationRate"></td>
+                    <td id="equipmentDepreciation1">0</td>
+                    <td id="equipmentDepreciation2">0</td>
+                    <td id="equipmentDepreciation3">0</td>
+                    <td id="equipmentDepreciation4">0</td>
+                    <td id="equipmentDepreciation5">0</td>
+                    <td id="equipmentDepreciation6">0</td>
+                    <td id="equipmentDepreciation7">0</td>
+                    <td id="equipmentDepreciation8">0</td>
+                    <td id="equipmentDepreciation9">0</td>
+                    <td id="equipmentDepreciation10">0</td>
+                    <td id="equipmentDepreciation11">0</td>
+                    <td id="equipmentDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>設備一括償却費</td>
+                    <td><input type="hidden" id="lumpSumEquipmentDepreciationRate"></td>
+                    <td id="lumpSumEquipmentDepreciation1">0</td>
+                    <td id="lumpSumEquipmentDepreciation2">0</td>
+                    <td id="lumpSumEquipmentDepreciation3">0</td>
+                    <td id="lumpSumEquipmentDepreciation4">0</td>
+                    <td id="lumpSumEquipmentDepreciation5">0</td>
+                    <td id="lumpSumEquipmentDepreciation6">0</td>
+                    <td id="lumpSumEquipmentDepreciation7">0</td>
+                    <td id="lumpSumEquipmentDepreciation8">0</td>
+                    <td id="lumpSumEquipmentDepreciation9">0</td>
+                    <td id="lumpSumEquipmentDepreciation10">0</td>
+                    <td id="lumpSumEquipmentDepreciation11">0</td>
+                    <td id="lumpSumEquipmentDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>ソフトウェア償却費</td>
+                    <td><input type="hidden" id="softwareDepreciationRate"></td>
+                    <td id="softwareDepreciation1">0</td>
+                    <td id="softwareDepreciation2">0</td>
+                    <td id="softwareDepreciation3">0</td>
+                    <td id="softwareDepreciation4">0</td>
+                    <td id="softwareDepreciation5">0</td>
+                    <td id="softwareDepreciation6">0</td>
+                    <td id="softwareDepreciation7">0</td>
+                    <td id="softwareDepreciation8">0</td>
+                    <td id="softwareDepreciation9">0</td>
+                    <td id="softwareDepreciation10">0</td>
+                    <td id="softwareDepreciation11">0</td>
+                    <td id="softwareDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>リース資産減価償却費</td>
+                    <td><input type="hidden" id="leasedAssetDepreciationRate"></td>
+                    <td id="leasedAssetDepreciation1">0</td>
+                    <td id="leasedAssetDepreciation2">0</td>
+                    <td id="leasedAssetDepreciation3">0</td>
+                    <td id="leasedAssetDepreciation4">0</td>
+                    <td id="leasedAssetDepreciation5">0</td>
+                    <td id="leasedAssetDepreciation6">0</td>
+                    <td id="leasedAssetDepreciation7">0</td>
+                    <td id="leasedAssetDepreciation8">0</td>
+                    <td id="leasedAssetDepreciation9">0</td>
+                    <td id="leasedAssetDepreciation10">0</td>
+                    <td id="leasedAssetDepreciation11">0</td>
+                    <td id="leasedAssetDepreciation12">0</td>
+                </tr>
+                <tr>
+                    <td>設備費計</td>
+                    <td><input type="hidden"></td>
+                    <td id="total-equipmentMonthly1" value="0"></td>
+                    <td id="total-equipmentMonthly2" value="0"></td>
+                    <td id="total-equipmentMonthly3" value="0"></td>
+                    <td id="total-equipmentMonthly4" value="0"></td>
+                    <td id="total-equipmentMonthly5" value="0"></td>
+                    <td id="total-equipmentMonthly6" value="0"></td>
+                    <td id="total-equipmentMonthly7" value="0"></td>
+                    <td id="total-equipmentMonthly8" value="0"></td>
+                    <td id="total-equipmentMonthly9" value="0"></td>
+                    <td id="total-equipmentMonthly10" value="0"></td>
+                    <td id="total-equipmentMonthly11" value="0"></td>
+                    <td id="total-equipmentMonthly12" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="total-container">
+            <span>年間計:</span>
+            <span id="total-value">0</span>
+        </div>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="save-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>
+    </form>
+
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const propertyId = new URLSearchParams(window.location.search).get('id');
+        // Firebase登録情報のデータ取得
+        let utilityCost = 0; // 水道光熱費
+        let landRent = 0; // 地代家賃
+        let commonAreaFee = 0; // 共益費
+        let expenseAllocation = 0; // 経費按分
+
+        // 初期費用のデータ取得
+        let depreciation = 0; // 償却月数
+        // 消耗備品費
+        let fireExtinguisher = 0; // 消火器
+        let phoneWiring = 0; // 電話配線工事
+        let registerInline = 0; // ﾚｼﾞｲﾝﾗｲﾝ工事
+        let storeEquipment = 0; // 店舗備品代
+        let interiorConstructionExpense = 0; // 内装工事経費落ち想定額
+
+        // 建物等減価償却費
+        let interior = 0; // 内装
+        let bWork = 0; // B工事
+
+        // 車両器具減価償却費
+        let fixtures = 0; // 什器
+
+        // 資産除去債務償却
+        let restoration = 0; // 現状回復
+
+        // 改装等設備償償却費
+        // 共通内装工事負担受入
+        // 設備償却費
+        let lighting = 0; // 照明
+        let registerSystem = 0; // ﾚｼﾞ・ｼｽﾃﾑ・ハンディ等
+        let commonInteriorCost = 0; // 共通内装費
+        let siteCooperation = 0; // 現場協力金
+        let interiorManagement = 0; // 内装管理費
+
+        // 設備一括償却費
+        // ソフトウェア償却費
+        // リース資産減価償却費
+
+        async function loadSalesData() {
+            if (!propertyId) return;
+            const docRef = doc(db, "properties", propertyId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const salesData = [
+                    data.salesMonthly1, data.salesMonthly2, data.salesMonthly3,
+                    data.salesMonthly4, data.salesMonthly5, data.salesMonthly6,
+                    data.salesMonthly7, data.salesMonthly8, data.salesMonthly9,
+                    data.salesMonthly10, data.salesMonthly11, data.salesMonthly12
+                ];
+                // Firebaseから取得した値を変数に設定
+                if (data.utilityCost) {
+                    utilityCost = data.utilityCost;
+                }
+                if (data.landRent) {
+                    landRent = data.landRent;
+                }
+                if (data.commonAreaFee) {
+                    commonAreaFee = data.commonAreaFee;
+                }
+                if (data.expenseAllocation) {
+                    expenseAllocation = data.expenseAllocation;
+                }
+                if (data.depreciation) {
+                    depreciation = data.depreciation;
+                }
+                if (data.fireExtinguisher) {
+                    fireExtinguisher = data.fireExtinguisher;
+                }
+                if (data.phoneWiring) {
+                    phoneWiring = data.phoneWiring;
+                }
+                if (data.registerInline) {
+                    registerInline = data.registerInline;
+                }
+                if (data.storeEquipment) {
+                    storeEquipment = data.storeEquipment;
+                }
+                if (data.interiorConstructionExpense) {
+                    interiorConstructionExpense = data.interiorConstructionExpense;
+                }
+                if (data.interior) {
+                    interior = data.interior;
+                }
+                if (data.bWork) {
+                    bWork = data.bWork;
+                }
+                if (data.fixtures) {
+                    fixtures = data.fixtures;
+                }
+                if (data.restoration) {
+                    restoration = data.restoration;
+                }
+                if (data.lighting) {
+                    lighting = data.lighting;
+                }
+                if (data.registerSystem) {
+                    registerSystem = data.registerSystem;
+                }
+                if (data.commonInteriorCost) {
+                    commonInteriorCost = data.commonInteriorCost;
+                }
+                if (data.siteCooperation) {
+                    siteCooperation = data.siteCooperation;
+                }
+                if (data.interiorManagement) {
+                    interiorManagement = data.interiorManagement;
+                }
+                updateAllExpenses(salesData);
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        function calculateAndDisplayExpenses(expenseType, salesData) {
+            const rateInput = document.getElementById(`${expenseType}Rate`);
+            if (!rateInput) {
+                console.error(`Element with ID ${expenseType}Rate not found`);
+            }
+            const rate = rateInput ? Number(rateInput.value) / 100 : 0;
+
+            // 関係会社地代家賃の計算
+            const associatedCompanyLandRent = landRent + (commonAreaFee * (expenseAllocation / 100));
+
+            // 消耗備品費の計算
+            const smallEquipmentCost = fireExtinguisher + phoneWiring + registerInline + storeEquipment + interiorConstructionExpense;
+
+            // 建物等減価償却費の計算（60ヶ月で割った月額）
+            const buildingDepreciation = (interior + bWork) / depreciation;
+
+            // 車両器具減価償却費の計算（60ヶ月で割った月額）
+            const vehicleEquipmentDepreciation = fixtures / depreciation;
+
+            // 資産除去債務償却の計算（60ヶ月で割った月額）
+            const assetRemovalDebtDepreciation = restoration / depreciation;
+
+            // 改装等設備償償却費の計算（60ヶ月で割った月額）
+            const renovationEquipmentDepreciation = 0;
+
+            // 共通内装工事負担受入の計算（60ヶ月で割った月額）
+            const commonInteriorConstruction = 0;
+
+            // 設備償却費の計算
+            const equipmentDepreciation = (lighting + registerSystem + commonInteriorCost + siteCooperation + interiorManagement) / depreciation;
+
+            // 設備一括償却費の計算（60ヶ月で割った月額）
+            const lumpSumEquipmentDepreciation = 0;
+
+            // ソフトウェア償却費の計算（60ヶ月で割った月額）
+            const softwareDepreciation = 0;
+
+            // リース資産減価償却費の計算（60ヶ月で割った月額）
+            const leasedAssetDepreciation = 0;
+
+            salesData.forEach((sales, index) => {
+                const month = index + 1;
+                let calculatedValue = sales * rate;
+
+                // 水道光熱費の毎月の計算
+                if (expenseType === "utilityCost") {
+                    calculatedValue = utilityCost;
+                }
+
+                // 関係会社地代家賃の毎月の計算
+                if (expenseType === "associatedCompanyLandRent") {
+                    calculatedValue = associatedCompanyLandRent;
+                }
+
+                // 建物等減価償却費の毎月の計算
+                if (expenseType === "buildingDepreciation") {
+                    calculatedValue = buildingDepreciation;
+                }
+
+                // 建物等減価償却費の毎月の計算
+                if (expenseType === "buildingDepreciation") {
+                    calculatedValue = buildingDepreciation;
+                }
+
+                // 消耗備品費の初月だけ初期費用の合算値を反映
+                if (expenseType === "smallEquipmentCost" && month === 1) {
+                    calculatedValue = smallEquipmentCost || 0;
+                }
+
+                // 建物等減価償却費の毎月の計算
+                if (expenseType === "buildingDepreciation") {
+                    calculatedValue = buildingDepreciation;
+                }
+
+                // 車両器具減価償却費の毎月の計算
+                if (expenseType === "vehicleEquipmentDepreciation") {
+                    calculatedValue = vehicleEquipmentDepreciation;
+                }
+
+                // 資産除去債務償却の毎月の計算
+                if (expenseType === "assetRemovalDebtDepreciation") {
+                    calculatedValue = restoration;
+                }
+
+                // 改装等設備償償却費の毎月の計算
+                if (expenseType === "renovationEquipmentDepreciation") {
+                    calculatedValue = renovationEquipmentDepreciation;
+                }
+
+                // 共通内装工事負担受入の毎月の計算
+                if (expenseType === "commonInteriorConstruction") {
+                    calculatedValue = commonInteriorConstruction;
+                }
+
+                // 設備償却費の毎月の計算
+                if (expenseType === "equipmentDepreciation") {
+                    calculatedValue = equipmentDepreciation;
+                }
+
+                // 設備一括償却費の毎月の計算
+                if (expenseType === "lumpSumEquipmentDepreciation") {
+                    calculatedValue = lumpSumEquipmentDepreciation;
+                }
+
+                // ソフトウェア償却費の毎月の計算
+                if (expenseType === "softwareDepreciation") {
+                    calculatedValue = softwareDepreciation;
+                }
+
+                // リース資産減価償却費の毎月の計算
+                if (expenseType === "leasedAssetDepreciation") {
+                    calculatedValue = leasedAssetDepreciation;
+                }
+
+                // リース料、店舗修繕費（アベレージがないので指数採用）、修繕費（決め打ち入力）
+                document.getElementById(`${expenseType}${month}`).innerText = calculatedValue.toFixed(0);
+            });
+
+            calculateTotal();
+        }
+
+
+        function setupExpenseCalculation() {
+            const expenseTypes = ["buildingDepreciation", "vehicleEquipmentDepreciation", "smallEquipmentCost"];
+    
+            expenseTypes.forEach(expenseType => {
+                const element = document.getElementById(`${expenseType}Rate`);
+                if (element) { // nullチェックを追加
+                    element.addEventListener("change", () => updateExpenses(expenseType));
+                } else {
+                    console.error(`Element with ID ${expenseType}Rate not found`);
+                }
+            });
+        }
+
+        function updateAllExpenses(salesData) {
+            const expenseTypes = ["utilityCost", "landRent", "associatedCompanyLandRent", "leaseFee", "storeMaintenance", "repairCost", "smallEquipmentCost", "buildingDepreciation", "vehicleEquipmentDepreciation", "assetRemovalDebtDepreciation", "renovationEquipmentDepreciation", "commonInteriorConstruction", "equipmentDepreciation", "lumpSumEquipmentDepreciation", "softwareDepreciation", "leasedAssetDepreciation"];
+            expenseTypes.forEach(expenseType => {
+                setupExpenseCalculation(expenseType, salesData);
+                calculateAndDisplayExpenses(expenseType, salesData); // 初期計算
+            });
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            const expenseTypes = ["utilityCost", "landRent", "associatedCompanyLandRent", "leaseFee", "storeMaintenance", "repairCost", "smallEquipmentCost", "buildingDepreciation", "vehicleEquipmentDepreciation", "assetRemovalDebtDepreciation", "renovationEquipmentDepreciation", "commonInteriorConstruction", "equipmentDepreciation", "lumpSumEquipmentDepreciation", "softwareDepreciation", "leasedAssetDepreciation"];
+
+            // 各月の合計を保存するためのオブジェクト
+            const monthlyTotals = {};
+
+            // 1月から12月までの合計を計算
+            for (let i = 1; i <= 12; i++) {
+                let monthlyTotal = 0;
+                expenseTypes.forEach(expenseType => {
+                    const value = Number(document.getElementById(`${expenseType}${i}`).innerText) || 0;
+                    monthlyTotal += value;
+                });
+
+                // 各月の合計を保存
+                monthlyTotals[`total-equipmentMonthly${i}`] = monthlyTotal;
+
+                // 各月の合計を表示
+                document.getElementById(`total-equipmentMonthly${i}`).textContent = Math.trunc(monthlyTotal).toLocaleString();
+
+                // 総合計に各月の合計を加算
+                total += monthlyTotal;
+            }
+
+            // 総合計を表示
+            document.getElementById("total-value").textContent = Math.trunc(total).toLocaleString();
+
+            return monthlyTotals; // 月ごとの合計を返す
+        }
+
+        document.getElementById("save-button").addEventListener("click", async () => {
+            const updatedExpenses = {};
+            const expenseTypes = ["utilityCost", "landRent", "associatedCompanyLandRent", "leaseFee", "storeMaintenance", "repairCost", "smallEquipmentCost", "buildingDepreciation", "vehicleEquipmentDepreciation", "assetRemovalDebtDepreciation", "renovationEquipmentDepreciation", "commonInteriorConstruction", "equipmentDepreciation", "lumpSumEquipmentDepreciation", "softwareDepreciation", "leasedAssetDepreciation"];
+
+            // 月ごとの合計値を保存するオブジェクト
+            const monthlyTotals = calculateTotal(); // calculateTotal関数を呼び出し、月ごとの合計を取得
+
+            for (let i = 1; i <= 12; i++) {
+                let monthlyTotal = 0;
+                expenseTypes.forEach(expenseType => {
+                    const value = Number(document.getElementById(`${expenseType}${i}`).innerText) || 0;
+                    updatedExpenses[`${expenseType}${i}`] = value;
+                    monthlyTotal += value;
+                });
+                // 月ごとの合計を表示（既に calculateTotal 関数で行っているため、ここで再計算しなくてもOK）
+                monthlyTotals[`total-equipmentMonthly${i}`] = monthlyTotal; // 合計値をオブジェクトに保存
+            }
+
+            if (propertyId) {
+                const docRef = doc(db, "properties", propertyId);
+                const updateData = {
+                    equipmentCost: Number(document.getElementById("total-value").textContent.replace(/,/g, '')),
+                    ...monthlyTotals // 月ごとの合計値を一緒に保存
+                };
+
+                await updateDoc(docRef, updatedExpenses);
+                await updateDoc(docRef, updateData);
+                alert("データが保存されました。");
+            } else {
+                alert("プロパティIDが指定されていません。");
+            }
+        });
+
+
+        // エンターキーを無効化するイベントリスナー
+        document.getElementById("equipment-edit-form").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+            }
+        });
+
+        loadSalesData();
+    </script>
+</body>
+</html>

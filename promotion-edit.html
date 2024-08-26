@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>販売促進費編集ページ</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>販売促進費編集ページ（初年度）</h2>
+    <form id="promotion-edit-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>指数設定 (%)</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 各項目の行 -->
+                <tr>
+                    <td>広告宣伝費</td>
+                    <td><input type="number" id="advertisingExpenseRate" value="2.871" step="0.1"></td>
+                    <td id="advertisingExpense1">0</td>
+                    <td id="advertisingExpense2">0</td>
+                    <td id="advertisingExpense3">0</td>
+                    <td id="advertisingExpense4">0</td>
+                    <td id="advertisingExpense5">0</td>
+                    <td id="advertisingExpense6">0</td>
+                    <td id="advertisingExpense7">0</td>
+                    <td id="advertisingExpense8">0</td>
+                    <td id="advertisingExpense9">0</td>
+                    <td id="advertisingExpense10">0</td>
+                    <td id="advertisingExpense11">0</td>
+                    <td id="advertisingExpense12">0</td>
+                </tr>
+                <tr>
+                    <td>チラシ費</td>
+                    <td><input type="number" id="flyerExpenseRate" value="0.1767" step="0.1"></td>
+                    <td id="flyerExpense1">0</td>
+                    <td id="flyerExpense2">0</td>
+                    <td id="flyerExpense3">0</td>
+                    <td id="flyerExpense4">0</td>
+                    <td id="flyerExpense5">0</td>
+                    <td id="flyerExpense6">0</td>
+                    <td id="flyerExpense7">0</td>
+                    <td id="flyerExpense8">0</td>
+                    <td id="flyerExpense9">0</td>
+                    <td id="flyerExpense10">0</td>
+                    <td id="flyerExpense11">0</td>
+                    <td id="flyerExpense12">0</td>
+                </tr>
+                <tr>
+                    <td>催事費</td>
+                    <td><input type="number" id="eventExpenseRate" value="0.0014" step="0.1"></td>
+                    <td id="eventExpense1" value="0"></td>
+                    <td id="eventExpense2" value="0"></td>
+                    <td id="eventExpense3" value="0"></td>
+                    <td id="eventExpense4" value="0"></td>
+                    <td id="eventExpense5" value="0"></td>
+                    <td id="eventExpense6" value="0"></td>
+                    <td id="eventExpense7" value="0"></td>
+                    <td id="eventExpense8" value="0"></td>
+                    <td id="eventExpense9" value="0"></td>
+                    <td id="eventExpense10" value="0"></td>
+                    <td id="eventExpense11" value="0"></td>
+                    <td id="eventExpense12" value="0"></td>
+                </tr>
+                <tr>
+                    <td>装飾費</td>
+                    <td><input type="number" id="decorationExpenseRate" value="0.0006" step="0.1"></td>
+                    <td id="decorationExpense1" value="0"></td>
+                    <td id="decorationExpense2" value="0"></td>
+                    <td id="decorationExpense3" value="0"></td>
+                    <td id="decorationExpense4" value="0"></td>
+                    <td id="decorationExpense5" value="0"></td>
+                    <td id="decorationExpense6" value="0"></td>
+                    <td id="decorationExpense7" value="0"></td>
+                    <td id="decorationExpense8" value="0"></td>
+                    <td id="decorationExpense9" value="0"></td>
+                    <td id="decorationExpense10" value="0"></td>
+                    <td id="decorationExpense11" value="0"></td>
+                    <td id="decorationExpense12" value="0"></td>
+                </tr>
+                <tr>
+                    <td>包装費</td>
+                    <td><input type="number" id="packagingExpenseRate" value="0.0534" step="0.1"></td>
+                    <td id="packagingExpense1" value="0"></td>
+                    <td id="packagingExpense2" value="0"></td>
+                    <td id="packagingExpense3" value="0"></td>
+                    <td id="packagingExpense4" value="0"></td>
+                    <td id="packagingExpense5" value="0"></td>
+                    <td id="packagingExpense6" value="0"></td>
+                    <td id="packagingExpense7" value="0"></td>
+                    <td id="packagingExpense8" value="0"></td>
+                    <td id="packagingExpense9" value="0"></td>
+                    <td id="packagingExpense10" value="0"></td>
+                    <td id="packagingExpense11" value="0"></td>
+                    <td id="packagingExpense12" value="0"></td>
+                </tr>
+                <tr>
+                    <td>販売用備品費</td>
+                    <td><input type="number" id="salesEquipmentExpenseRate" value="0.0191" step="0.1"></td>
+                    <td id="salesEquipmentExpense1" value="0"></td>
+                    <td id="salesEquipmentExpense2" value="0"></td>
+                    <td id="salesEquipmentExpense3" value="0"></td>
+                    <td id="salesEquipmentExpense4" value="0"></td>
+                    <td id="salesEquipmentExpense5" value="0"></td>
+                    <td id="salesEquipmentExpense6" value="0"></td>
+                    <td id="salesEquipmentExpense7" value="0"></td>
+                    <td id="salesEquipmentExpense8" value="0"></td>
+                    <td id="salesEquipmentExpense9" value="0"></td>
+                    <td id="salesEquipmentExpense10" value="0"></td>
+                    <td id="salesEquipmentExpense11" value="0"></td>
+                    <td id="salesEquipmentExpense12" value="0"></td>
+                </tr>
+                <tr>
+                    <td>販売用備品賃借料</td>
+                    <td><input type="number" id="salesEquipmentRentRate" value="0.0422" step="0.1"></td>
+                    <td id="salesEquipmentRent1" value="0"></td>
+                    <td id="salesEquipmentRent2" value="0"></td>
+                    <td id="salesEquipmentRent3" value="0"></td>
+                    <td id="salesEquipmentRent4" value="0"></td>
+                    <td id="salesEquipmentRent5" value="0"></td>
+                    <td id="salesEquipmentRent6" value="0"></td>
+                    <td id="salesEquipmentRent7" value="0"></td>
+                    <td id="salesEquipmentRent8" value="0"></td>
+                    <td id="salesEquipmentRent9" value="0"></td>
+                    <td id="salesEquipmentRent10" value="0"></td>
+                    <td id="salesEquipmentRent11" value="0"></td>
+                    <td id="salesEquipmentRent12" value="0"></td>
+                </tr>
+                <tr>
+                    <td>販売雑費</td>
+                    <td><input type="number" id="salesMiscExpenseRate" value="1.3642" step="0.1"></td>
+                    <td id="salesMiscExpense1" value="0"></td>
+                    <td id="salesMiscExpense2" value="0"></td>
+                    <td id="salesMiscExpense3" value="0"></td>
+                    <td id="salesMiscExpense4" value="0"></td>
+                    <td id="salesMiscExpense5" value="0"></td>
+                    <td id="salesMiscExpense6" value="0"></td>
+                    <td id="salesMiscExpense7" value="0"></td>
+                    <td id="salesMiscExpense8" value="0"></td>
+                    <td id="salesMiscExpense9" value="0"></td>
+                    <td id="salesMiscExpense10" value="0"></td>
+                    <td id="salesMiscExpense11" value="0"></td>
+                    <td id="salesMiscExpense12" value="0"></td>
+                </tr>
+                <tr>
+                    <td>販促費計</td>
+                    <td><input type="hidden"></td>
+                    <td id="total-promotionMonthly1" value="0"></td>
+                    <td id="total-promotionMonthly2" value="0"></td>
+                    <td id="total-promotionMonthly3" value="0"></td>
+                    <td id="total-promotionMonthly4" value="0"></td>
+                    <td id="total-promotionMonthly5" value="0"></td>
+                    <td id="total-promotionMonthly6" value="0"></td>
+                    <td id="total-promotionMonthly7" value="0"></td>
+                    <td id="total-promotionMonthly8" value="0"></td>
+                    <td id="total-promotionMonthly9" value="0"></td>
+                    <td id="total-promotionMonthly10" value="0"></td>
+                    <td id="total-promotionMonthly11" value="0"></td>
+                    <td id="total-promotionMonthly12" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="total-container">
+            <span>年間計:</span>
+            <span id="total-value">0</span>
+        </div>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="save-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>
+    </form>
+
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const propertyId = new URLSearchParams(window.location.search).get('id');
+        let openingPromotion = 0;
+        let openingFlyer = 0;
+
+        async function loadSalesData() {
+            if (!propertyId) return;
+            const docRef = doc(db, "properties", propertyId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const salesData = [
+                    data.salesMonthly1, data.salesMonthly2, data.salesMonthly3,
+                    data.salesMonthly4, data.salesMonthly5, data.salesMonthly6,
+                    data.salesMonthly7, data.salesMonthly8, data.salesMonthly9,
+                    data.salesMonthly10, data.salesMonthly11, data.salesMonthly12
+                ];
+                // Firebaseから取得した値を変数に設定
+                if (data.openingPromotion) {
+                    openingPromotion = data.openingPromotion;
+                }
+                if (data.openingFlyer) {
+                    openingFlyer = data.openingFlyer;
+                }
+                updateAllExpenses(salesData);
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        function calculateAndDisplayExpenses(expenseType, salesData) {
+            const rateInput = document.getElementById(`${expenseType}Rate`);
+            const rate = Number(rateInput.value) / 100;
+
+            salesData.forEach((sales, index) => {
+                const month = index + 1;
+                let calculatedValue = sales * rate;
+
+                // 広告宣伝費の初月だけopeningPromotionを加算
+                if (expenseType === "advertisingExpense" && month === 1) {
+                    calculatedValue += openingPromotion || 0;
+                }
+
+                // チラシ費の初月だけopeningFlyerを反映
+                if (expenseType === "flyerExpense" && month === 1) {
+                    calculatedValue = openingFlyer || 0;
+                }
+
+                // テーブルに表示
+                document.getElementById(`${expenseType}${month}`).innerText = calculatedValue.toFixed(0);
+            });
+
+            calculateTotal();
+        }
+
+
+        function setupExpenseCalculation(expenseType, salesData) {
+            const rateInput = document.getElementById(`${expenseType}Rate`);
+            rateInput.addEventListener("input", () => calculateAndDisplayExpenses(expenseType, salesData));
+        }
+
+        function updateAllExpenses(salesData) {
+            const expenseTypes = ["advertisingExpense", "flyerExpense", "eventExpense", "decorationExpense", "packagingExpense", "salesEquipmentExpense", "salesEquipmentRent", "salesMiscExpense"];
+            expenseTypes.forEach(expenseType => {
+                setupExpenseCalculation(expenseType, salesData);
+                calculateAndDisplayExpenses(expenseType, salesData); // 初期計算
+            });
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            const expenseTypes = ["advertisingExpense", "flyerExpense", "eventExpense", "decorationExpense", "packagingExpense", "salesEquipmentExpense", "salesEquipmentRent", "salesMiscExpense"];
+
+            // 各月の合計を保存するためのオブジェクト
+            const monthlyTotals = {};
+
+            // 1月から12月までの合計を計算
+            for (let i = 1; i <= 12; i++) {
+                let monthlyTotal = 0;
+                expenseTypes.forEach(expenseType => {
+                    const value = Number(document.getElementById(`${expenseType}${i}`).innerText) || 0;
+                    monthlyTotal += value;
+                });
+
+                // 各月の合計を保存
+                monthlyTotals[`total-promotionMonthly${i}`] = monthlyTotal;
+
+                // 各月の合計を表示
+                document.getElementById(`total-promotionMonthly${i}`).textContent = Math.trunc(monthlyTotal).toLocaleString();
+
+                // 総合計に各月の合計を加算
+                total += monthlyTotal;
+            }
+
+            // 総合計を表示
+            document.getElementById("total-value").textContent = Math.trunc(total).toLocaleString();
+
+            return monthlyTotals; // 月ごとの合計を返す
+        }
+
+        document.getElementById("save-button").addEventListener("click", async () => {
+            const updatedExpenses = {};
+            const expenseTypes = ["advertisingExpense", "flyerExpense", "eventExpense", "decorationExpense", "packagingExpense", "salesEquipmentExpense", "salesEquipmentRent", "salesMiscExpense"];
+
+            // 月ごとの合計値を保存するオブジェクト
+            const monthlyTotals = calculateTotal(); // calculateTotal関数を呼び出し、月ごとの合計を取得
+
+            for (let i = 1; i <= 12; i++) {
+                let monthlyTotal = 0;
+                expenseTypes.forEach(expenseType => {
+                    const value = Number(document.getElementById(`${expenseType}${i}`).innerText) || 0;
+                    updatedExpenses[`${expenseType}${i}`] = value;
+                    monthlyTotal += value;
+                });
+                // 月ごとの合計を表示（既に calculateTotal 関数で行っているため、ここで再計算しなくてもOK）
+                monthlyTotals[`total-promotionMonthly${i}`] = monthlyTotal; // 合計値をオブジェクトに保存
+            }
+
+            if (propertyId) {
+                const docRef = doc(db, "properties", propertyId);
+                const updateData = {
+                    promotion: Number(document.getElementById("total-value").textContent.replace(/,/g, '')),
+                    ...monthlyTotals // 月ごとの合計値を一緒に保存
+                };
+
+                await updateDoc(docRef, updatedExpenses);
+                await updateDoc(docRef, updateData);
+                alert("データが保存されました。");
+            } else {
+                alert("プロパティIDが指定されていません。");
+            }
+        });
+
+
+        // エンターキーを無効化するイベントリスナー
+        document.getElementById("promotion-edit-form").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+            }
+        });
+
+        loadSalesData();
+    </script>
+</body>
+</html>

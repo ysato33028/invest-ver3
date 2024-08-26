@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月別売上高編集ページ</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>月別売上高編集ページ（初年度）</h2>
+    <form id="monthly-sales-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>売上高 (円)</th>
+                    <th>季節係数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>初月度</td>
+                    <td><input type="number" id="salesMonthly1"></td>
+                    <td><input type="number" id="seasonalFactor1" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>2ヶ月目</td>
+                    <td><input type="number" id="salesMonthly2"></td>
+                    <td><input type="number" id="seasonalFactor2" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>3ヶ月目</td>
+                    <td><input type="number" id="salesMonthly3"></td>
+                    <td><input type="number" id="seasonalFactor3" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>4ヶ月目</td>
+                    <td><input type="number" id="salesMonthly4"></td>
+                    <td><input type="number" id="seasonalFactor4" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>5ヶ月目</td>
+                    <td><input type="number" id="salesMonthly5"></td>
+                    <td><input type="number" id="seasonalFactor5" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>6ヶ月目</td>
+                    <td><input type="number" id="salesMonthly6"></td>
+                    <td><input type="number" id="seasonalFactor6" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>7ヶ月目</td>
+                    <td><input type="number" id="salesMonthly7"></td>
+                    <td><input type="number" id="seasonalFactor7" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>8ヶ月目</td>
+                    <td><input type="number" id="salesMonthly8"></td>
+                    <td><input type="number" id="seasonalFactor8" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>9ヶ月目</td>
+                    <td><input type="number" id="salesMonthly9"></td>
+                    <td><input type="number" id="seasonalFactor9" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>10ヶ月目</td>
+                    <td><input type="number" id="salesMonthly10"></td>
+                    <td><input type="number" id="seasonalFactor10" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>11ヶ月目</td>
+                    <td><input type="number" id="salesMonthly11"></td>
+                    <td><input type="number" id="seasonalFactor11" value="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>12ヶ月目</td>
+                    <td><input type="number" id="salesMonthly12"></td>
+                    <td><input type="number" id="seasonalFactor12" value="1" step="0.1"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="save-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>
+    </form>
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        // Firebaseの初期化
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // URLからidパラメータを取得
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const propertyId = getQueryParam('id');
+
+        // 年間売上
+        let annualSales = 1200000; // 仮の値、Firebaseから取得可能にする
+
+        // フォームの入力をFirebaseに保存
+        document.getElementById("save-button").addEventListener("click", async () => {
+            if (confirm(`物件情報を更新しますか？`)) {
+                try {
+                    if (propertyId) {
+                        const docRef = doc(db, "properties", propertyId);
+
+                        // 更新するデータをオブジェクトにまとめる
+                        const updateData = {};
+                        for (let i = 1; i <= 12; i++) {
+                            updateData[`salesMonthly${i}`] = Number(document.getElementById(`salesMonthly${i}`).value);
+                            updateData[`seasonalFactor${i}`] = Number(document.getElementById(`seasonalFactor${i}`).value);
+                        }
+
+                        // Firebaseのドキュメントを更新
+                        await updateDoc(docRef, updateData);
+                        alert("データが更新されました");
+                    } else {
+                        alert("物件IDが指定されていません。");
+                    }
+                } catch (error) {
+                    console.error("エラーが発生しました: ", error);
+                    alert("保存中にエラーが発生しました。");
+                }
+            }
+        });
+
+        // 季節係数の変更で売上を再計算
+        function recalculateSales() {
+            let totalSeasonalFactor = 0;
+            for (let i = 1; i <= 12; i++) {
+                totalSeasonalFactor += Number(document.getElementById(`seasonalFactor${i}`).value);
+            }
+            
+            let totalMonthlySales = 0;
+            for (let i = 1; i <= 12; i++) {
+                const seasonalFactor = Number(document.getElementById(`seasonalFactor${i}`).value);
+                const adjustedSales = (annualSales * (seasonalFactor / totalSeasonalFactor)).toFixed(0);
+                totalMonthlySales += Number(adjustedSales);
+                document.getElementById(`salesMonthly${i}`).value = adjustedSales;
+            }
+            
+            // 誤差を補正
+            const correctionFactor = annualSales / totalMonthlySales;
+            for (let i = 1; i <= 12; i++) {
+                const correctedSales = (Number(document.getElementById(`salesMonthly${i}`).value) * correctionFactor).toFixed(0);
+                document.getElementById(`salesMonthly${i}`).value = correctedSales;
+            }
+        }
+
+        // 季節係数の変更時に再計算
+        for (let i = 1; i <= 12; i++) {
+            document.getElementById(`seasonalFactor${i}`).addEventListener('input', recalculateSales);
+        }
+
+        // ページ読み込み時にデータをロードし、初期化
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                if (propertyId) {
+                    const docRef = doc(db, "properties", propertyId);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        annualSales = data.annualSales || annualSales; // 年間売上を取得
+                        // Firebaseから取得したデータをフォームに表示
+                        const seasonalFactors = [];
+                        const monthlySales = [];
+
+                        for (let i = 1; i <= 12; i++) {
+                            seasonalFactors[i - 1] = data[`seasonalFactor${i}`] || 1;
+                            monthlySales[i - 1] = data[`salesMonthly${i}`] || (annualSales / 12);
+                        }
+
+                        // フォームにデータを設定
+                        for (let i = 1; i <= 12; i++) {
+                            document.getElementById(`seasonalFactor${i}`).value = seasonalFactors[i - 1];
+                            document.getElementById(`salesMonthly${i}`).value = monthlySales[i - 1];
+                        }
+
+                        // 売上高が一致するように調整
+                        recalculateSales();
+                    } else {
+                        // データが存在しない場合は年間売上高を12分割して表示
+                        const monthlySalesDefault = (annualSales / 12).toFixed(0);
+
+                        for (let i = 1; i <= 12; i++) {
+                            document.getElementById(`salesMonthly${i}`).value = monthlySalesDefault;
+                            document.getElementById(`seasonalFactor${i}`).value = 1;
+                        }
+                    }
+                } else {
+                    // URLからIDが取得できない場合
+                    const monthlySalesDefault = (annualSales / 12).toFixed(0);
+
+                    for (let i = 1; i <= 12; i++) {
+                        document.getElementById(`salesMonthly${i}`).value = monthlySalesDefault;
+                        document.getElementById(`seasonalFactor${i}`).value = 1;
+                    }
+                }
+            } catch (error) {
+                console.error("データ取得中にエラーが発生しました: ", error);
+                alert("データ取得中にエラーが発生しました。");
+            }
+        });
+    </script>
+</body>
+</html>
+

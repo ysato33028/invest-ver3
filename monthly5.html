@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月度別シミュレーション</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>月度別シミュレーション（5年目）</h2>
+    <form id="monthly-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>1ヶ月目</th>
+                    <th>2ヶ月目</th>
+                    <th>3ヶ月目</th>
+                    <th>4ヶ月目</th>
+                    <th>5ヶ月目</th>
+                    <th>6ヶ月目</th>
+                    <th>7ヶ月目</th>
+                    <th>8ヶ月目</th>
+                    <th>9ヶ月目</th>
+                    <th>10ヶ月目</th>
+                    <th>11ヶ月目</th>
+                    <th>12ヶ月目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>売上高 (円)</th>
+                    <td id="salesMonthly1"></td>
+                    <td id="salesMonthly2"></td>
+                    <td id="salesMonthly3"></td>
+                    <td id="salesMonthly4"></td>
+                    <td id="salesMonthly5"></td>
+                    <td id="salesMonthly6"></td>
+                    <td id="salesMonthly7"></td>
+                    <td id="salesMonthly8"></td>
+                    <td id="salesMonthly9"></td>
+                    <td id="salesMonthly10"></td>
+                    <td id="salesMonthly11"></td>
+                    <td id="salesMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>売上原価 (円)</th>
+                    <td id="costOfSalesMonthly1"></td>
+                    <td id="costOfSalesMonthly2"></td>
+                    <td id="costOfSalesMonthly3"></td>
+                    <td id="costOfSalesMonthly4"></td>
+                    <td id="costOfSalesMonthly5"></td>
+                    <td id="costOfSalesMonthly6"></td>
+                    <td id="costOfSalesMonthly7"></td>
+                    <td id="costOfSalesMonthly8"></td>
+                    <td id="costOfSalesMonthly9"></td>
+                    <td id="costOfSalesMonthly10"></td>
+                    <td id="costOfSalesMonthly11"></td>
+                    <td id="costOfSalesMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>売上純利益 (円)</th>
+                    <td id="gross-profitMonthly1"></td>
+                    <td id="gross-profitMonthly2"></td>
+                    <td id="gross-profitMonthly3"></td>
+                    <td id="gross-profitMonthly4"></td>
+                    <td id="gross-profitMonthly5"></td>
+                    <td id="gross-profitMonthly6"></td>
+                    <td id="gross-profitMonthly7"></td>
+                    <td id="gross-profitMonthly8"></td>
+                    <td id="gross-profitMonthly9"></td>
+                    <td id="gross-profitMonthly10"></td>
+                    <td id="gross-profitMonthly11"></td>
+                    <td id="gross-profitMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>人件費 (円)</th>
+                    <td id="total-personnelMonthly1"></td>
+                    <td id="total-personnelMonthly2"></td>
+                    <td id="total-personnelMonthly3"></td>
+                    <td id="total-personnelMonthly4"></td>
+                    <td id="total-personnelMonthly5"></td>
+                    <td id="total-personnelMonthly6"></td>
+                    <td id="total-personnelMonthly7"></td>
+                    <td id="total-personnelMonthly8"></td>
+                    <td id="total-personnelMonthly9"></td>
+                    <td id="total-personnelMonthly10"></td>
+                    <td id="total-personnelMonthly11"></td>
+                    <td id="total-personnelMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>販売促進費 (円)</th>
+                    <td id="total-promotionMonthly1"></td>
+                    <td id="total-promotionMonthly2"></td>
+                    <td id="total-promotionMonthly3"></td>
+                    <td id="total-promotionMonthly4"></td>
+                    <td id="total-promotionMonthly5"></td>
+                    <td id="total-promotionMonthly6"></td>
+                    <td id="total-promotionMonthly7"></td>
+                    <td id="total-promotionMonthly8"></td>
+                    <td id="total-promotionMonthly9"></td>
+                    <td id="total-promotionMonthly10"></td>
+                    <td id="total-promotionMonthly11"></td>
+                    <td id="total-promotionMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>販売費一般管理費合計 (円)</th>
+                    <td id="total-sgaMonthly1"></td>
+                    <td id="total-sgaMonthly2"></td>
+                    <td id="total-sgaMonthly3"></td>
+                    <td id="total-sgaMonthly4"></td>
+                    <td id="total-sgaMonthly5"></td>
+                    <td id="total-sgaMonthly6"></td>
+                    <td id="total-sgaMonthly7"></td>
+                    <td id="total-sgaMonthly8"></td>
+                    <td id="total-sgaMonthly9"></td>
+                    <td id="total-sgaMonthly10"></td>
+                    <td id="total-sgaMonthly11"></td>
+                    <td id="total-sgaMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>営業利益 (円)</th>
+                    <td id="operating-profitMonthly1"></td>
+                    <td id="operating-profitMonthly2"></td>
+                    <td id="operating-profitMonthly3"></td>
+                    <td id="operating-profitMonthly4"></td>
+                    <td id="operating-profitMonthly5"></td>
+                    <td id="operating-profitMonthly6"></td>
+                    <td id="operating-profitMonthly7"></td>
+                    <td id="operating-profitMonthly8"></td>
+                    <td id="operating-profitMonthly9"></td>
+                    <td id="operating-profitMonthly10"></td>
+                    <td id="operating-profitMonthly11"></td>
+                    <td id="operating-profitMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>税金概算（40％） (円)</th>
+                    <td id="taxMonthly1"></td>
+                    <td id="taxMonthly2"></td>
+                    <td id="taxMonthly3"></td>
+                    <td id="taxMonthly4"></td>
+                    <td id="taxMonthly5"></td>
+                    <td id="taxMonthly6"></td>
+                    <td id="taxMonthly7"></td>
+                    <td id="taxMonthly8"></td>
+                    <td id="taxMonthly9"></td>
+                    <td id="taxMonthly10"></td>
+                    <td id="taxMonthly11"></td>
+                    <td id="taxMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>税引後純利益 (円)</th>
+                    <td id="net-incomeMonthly1"></td>
+                    <td id="net-incomeMonthly2"></td>
+                    <td id="net-incomeMonthly3"></td>
+                    <td id="net-incomeMonthly4"></td>
+                    <td id="net-incomeMonthly5"></td>
+                    <td id="net-incomeMonthly6"></td>
+                    <td id="net-incomeMonthly7"></td>
+                    <td id="net-incomeMonthly8"></td>
+                    <td id="net-incomeMonthly9"></td>
+                    <td id="net-incomeMonthly10"></td>
+                    <td id="net-incomeMonthly11"></td>
+                    <td id="net-incomeMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>キャッシュフロー (円)</th>
+                    <td id="cash-flowMonthly1"></td>
+                    <td id="cash-flowMonthly2"></td>
+                    <td id="cash-flowMonthly3"></td>
+                    <td id="cash-flowMonthly4"></td>
+                    <td id="cash-flowMonthly5"></td>
+                    <td id="cash-flowMonthly6"></td>
+                    <td id="cash-flowMonthly7"></td>
+                    <td id="cash-flowMonthly8"></td>
+                    <td id="cash-flowMonthly9"></td>
+                    <td id="cash-flowMonthly10"></td>
+                    <td id="cash-flowMonthly11"></td>
+                    <td id="cash-flowMonthly12"></td>
+                </tr>
+                <tr>
+                    <th>投資回収残高 (円)</th>
+                    <td id="investment-recoveryMonthly1"></td>
+                    <td id="investment-recoveryMonthly2"></td>
+                    <td id="investment-recoveryMonthly3"></td>
+                    <td id="investment-recoveryMonthly4"></td>
+                    <td id="investment-recoveryMonthly5"></td>
+                    <td id="investment-recoveryMonthly6"></td>
+                    <td id="investment-recoveryMonthly7"></td>
+                    <td id="investment-recoveryMonthly8"></td>
+                    <td id="investment-recoveryMonthly9"></td>
+                    <td id="investment-recoveryMonthly10"></td>
+                    <td id="investment-recoveryMonthly11"></td>
+                    <td id="investment-recoveryMonthly12"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="update-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>
+    </form>
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        // Firebaseの初期化
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // URLからidパラメータを取得
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const propertyId = getQueryParam('id');
+
+        async function loadPropertyMonthly() {
+            try {
+                if (propertyId) {
+                    const docRef = doc(db, "properties", propertyId);
+                    const docSnap = await getDoc(docRef);
+                    const growthRates = 100; // 1年目の売上伸び率は固定で100%
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+
+                        // Firebaseに保存されている各月のデータを取得し表示
+                        for (let i = 49; i <= 60; i++) {
+                            const monthlyPromotion = data[`total-promotionMonthly${i}`] || 0;
+                            const monthlyEquipmentCost = data[`total-equipmentMonthly${i}`] || 0;
+                            const monthlygeneral = data[`total-generalMonthly${i}`] || 0;
+
+                            const promotionElement = document.getElementById(`total-promotionMonthly${i}`);
+                            const equipmentElement = document.getElementById(`total-equipmentMonthly${i}`);
+                            const generalCost = document.getElementById(`total-generalMonthly${i}`);
+
+                            if (promotionElement) {
+                                promotionElement.textContent = monthlyPromotion.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            }
+
+                            if (equipmentElement) {
+                                equipmentElement.textContent = monthlyEquipmentCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            }
+
+                            if (generalCost) {
+                                generalCost.textContent = monthlygeneral.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            }
+                        }
+
+                        // その他のデータ処理（例: 売上、利益など）
+                        const annualSales = data.salesYear5 || 0;
+                        const marginRate = data.marginRateYear5 || 0;
+                        const seasonalFactors = [];
+
+                        // Seasonal Factorsを読み取る
+                        for (let i = 13; i <= 24; i++) {
+                            seasonalFactors.push(data[`seasonalFactor${i}`] || 1);
+                        }
+
+                        // Seasonal Factorsの合算
+                        const totalSeasonalFactor = seasonalFactors.reduce((sum, factor) => sum + factor, 0);
+
+                        // 構成比を算出し、各月の売上を計算
+                        let monthlySalesArray = seasonalFactors.map(factor => (factor / totalSeasonalFactor) * annualSales);
+
+                        // 売上の小数点の誤差調整
+                        const totalMonthlySales = monthlySalesArray.reduce((sum, sales) => sum + sales, 0);
+                        const salesDifference = annualSales - totalMonthlySales;
+
+                        // 誤差を最後の月に調整
+                        if (salesDifference !== 0) {
+                            monthlySalesArray[11] += salesDifference;
+                        }
+
+                        // Firebase から取得
+                        const cashFlow = data["cashFlowYear4"] || 0;
+                        const investmentRecovery = data["investmentRecoveryBalanceYear4"] || 0;
+
+                        // 初期投資額
+                        const investment = data.totalInitial || 0;
+
+                        // 1年目のキャッシュフローが投資残高を上回るかどうかを確認
+                        let remainingInvestment = investmentRecovery;
+                        if (cashFlow >= investment) {
+                            remainingInvestment = investmentRecovery + cashFlow;
+                        } else {
+                            remainingInvestment = investmentRecovery - cashFlow;
+                        }
+
+                        let cumulativeCashFlow = 0;
+
+                        // 年間計算する際も四捨五入を使用
+                        let totalCostOfSales = 0;
+
+                        // 各月の売上高から計算を行う
+                        monthlySalesArray.forEach((monthlySales, i) => {
+                            // 売上原価を計算し、小数点以下も表示
+                            const monthlyCostOfSales = monthlySales * (1 - marginRate / 100);
+                            totalCostOfSales += monthlyCostOfSales; // 売上原価
+                            const monthlyProfit = monthlySales - monthlyCostOfSales; // 売上総利益
+
+                            const monthlyPersonnel = data.personnel / 12; // 人件費計
+                            const monthlyPromotion = data[`total-promotionMonthly${i + 49}`] || 0; // Firebaseのデータを使用
+                            const monthlyEquipmentCost = data[`total-equipmentMonthly${i + 49}`] || 0; // Firebaseのデータを使用
+                            const monthlygeneral = data[`total-generalMonthly${i + 49}`] || 0; // Firebaseのデータを使用
+                            const monthlyOperatingCosts = monthlyPersonnel + monthlyPromotion + monthlyEquipmentCost + monthlygeneral;
+                            const monthlyDepreciation = (data.totalInitial || 0) / (data.depreciation || 1); // 月ごとの減価償却費
+                            const monthlytotalSGA = monthlyOperatingCosts; // 販売費一般管理費合計
+                            const monthlyOperatingProfit = monthlyProfit - monthlytotalSGA; // 営業利益
+                            const monthlyTax = monthlyOperatingProfit * 0.4; // 税金概算（40％）
+                            const monthlyNetIncome = monthlyOperatingProfit - monthlyTax; // 税引後純利益
+                            const monthlyCashFlow = monthlyNetIncome + monthlyDepreciation; // 営業キャッシュフロー
+
+                            // 累積キャッシュフローに加算
+                            cumulativeCashFlow += monthlyCashFlow;
+
+                            // 毎月、投資回収残高に今月のキャッシュフローを足す
+                            remainingInvestment = investmentRecovery + cumulativeCashFlow;
+                            const investmentRecoveryBalance = remainingInvestment;
+
+                            // 残高がマイナスになった場合は表示を赤字にする
+                            const recoveryBalanceText = investmentRecoveryBalance >= 0
+                                ? `${investmentRecoveryBalance.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+                                : `<span style="color: red;"> ${Math.abs(investmentRecoveryBalance).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span>`;
+
+                            // DOMに反映
+                            document.getElementById(`salesMonthly${i + 1}`).textContent = monthlySales.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`costOfSalesMonthly${i + 1}`).textContent = monthlyCostOfSales.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`gross-profitMonthly${i + 1}`).textContent = monthlyProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`total-personnelMonthly${i + 1}`).textContent = monthlyPersonnel.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`total-promotionMonthly${i + 1}`).textContent = monthlyPromotion.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`total-sgaMonthly${i + 1}`).textContent = monthlytotalSGA.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`operating-profitMonthly${i + 1}`).textContent = monthlyOperatingProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`taxMonthly${i + 1}`).textContent = monthlyTax.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`net-incomeMonthly${i + 1}`).textContent = monthlyNetIncome.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            document.getElementById(`cash-flowMonthly${i + 1}`).textContent = monthlyCashFlow.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                            // 投資回収残高を表示
+                            document.getElementById(`investment-recoveryMonthly${i + 1}`).innerHTML = recoveryBalanceText;
+                        });
+
+                        // 合計売上原価と年間売上からの計算が一致するか確認
+                        const calculatedAnnualCostOfSales = annualSales * (1 - marginRate / 100);
+                        if (Math.abs(calculatedAnnualCostOfSales - totalCostOfSales) > 1) {
+                            console.warn("年間売上原価と月別の合算が一致しません。誤差があります。");
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error("Error loading property monthly data: ", error);
+            }
+        }
+
+
+        // 更新ボタンのクリックイベント
+        document.getElementById("update-button").addEventListener("click", async () => {
+            
+
+            // ポップアップで確認
+            if (confirm(`物件情報を更新しますか？`)) {
+                try {
+                    if (propertyId) {
+                        // 既存の物件を更新
+                        const docRef = doc(db, "properties", propertyId);
+                        await updateDoc(docRef, {
+                            
+                        });
+                        alert("データが更新されました");
+                    } else {
+                        // 新規登録
+                        alert("物件IDが指定されていません。");
+                    }
+                } catch (error) {
+                    console.error("エラーが発生しました: ", error);
+                    alert("保存中にエラーが発生しました。");
+                }
+            }
+        });
+
+        // ページ読み込み時にデータをロード
+        window.addEventListener('DOMContentLoaded', loadPropertyMonthly);
+    </script>
+</body>
+</html>

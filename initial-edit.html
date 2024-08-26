@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初期投資編集ページ</title>
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <h2>初期投資編集ページ</h2>
+    <form id="initial-investment-form">
+        <table>
+        <tbody>
+            <tr>
+                <th>項目</th>
+                <th>金額 (円)</th>
+            </tr>
+            <tr>
+                <td>内装</td>
+                <td><input type="number" id="interior" value="11250000"></td>
+            </tr>
+            <tr>
+                <td>什器</td>
+                <td><input type="number" id="fixtures" value="4400000"></td>
+            </tr>
+            <tr>
+                <td>照明</td>
+                <td><input type="number" id="lighting" value="330000"></td>
+            </tr>
+            <tr>
+                <td>設計料</td>
+                <td><input type="number" id="designFee" value="0"></td>
+            </tr>
+            <tr>
+                <td>レジ・システム・ハンディ等</td>
+                <td><input type="number" id="registerSystem" value="0"></td>
+            </tr>
+            <tr>
+                <td>B工事</td>
+                <td><input type="number" id="bWork" value="1700000"></td>
+            </tr>
+            <tr>
+                <td>共通内装費</td>
+                <td><input type="number" id="commonInteriorCost" value="0"></td>
+            </tr>
+            <tr>
+                <td>現場協力金</td>
+                <td><input type="number" id="siteCooperation" value="570000"></td>
+            </tr>
+            <tr>
+                <td>内装管理費</td>
+                <td><input type="number" id="interiorManagement" value="570000"></td>
+            </tr>
+            <tr>
+                <td>オープン販促費</td>
+                <td><input type="number" id="openingPromotion" value="0"></td>
+            </tr>
+            <tr>
+                <td>消化器</td>
+                <td><input type="number" id="fireExtinguisher" value="0"></td>
+            </tr>
+            <tr>
+                <td>電話配線工事</td>
+                <td><input type="number" id="phoneWiring" value="0"></td>
+            </tr>
+            <tr>
+                <td>レジインライン工事</td>
+                <td><input type="number" id="registerInline" value="0"></td>
+            </tr>
+            <tr>
+                <td>現状回復</td>
+                <td><input type="number" id="restoration" value="0"></td>
+            </tr>
+            <tr>
+                <td>保証金金利額</td>
+                <td><input type="number" id="depositInterest" value="0"></td>
+            </tr>
+            <tr>
+                <td>店舗備品代</td>
+                <td><input type="number" id="storeEquipment" value="290000"></td>
+            </tr>
+            <tr>
+                <td>陳列応援経費</td>
+                <td><input type="number" id="displaySupport" value="800000"></td>
+            </tr>
+            <tr>
+                <td>開店前人件費</td>
+                <td><input type="number" id="preOpeningPersonnel" value="0"></td>
+            </tr>
+            <tr>
+                <td>採用費（会場・媒体）</td>
+                <td><input type="number" id="recruitmentCost" value="0"></td>
+            </tr>
+            <tr>
+                <td>オープニングチラシ</td>
+                <td><input type="number" id="openingFlyer" value="300000"></td>
+            </tr>
+            <tr>
+                <td>各種申請料</td>
+                <td><input type="number" id="applicationFee" value="0"></td>
+            </tr>
+            <tr>
+                <td>内装工事経費落ち想定額</td>
+                <td><input type="number" id="interiorConstructionExpense" value="0"></td>
+            </tr>
+        </tbody>
+        </table>
+        <div id="total-container">
+            <span>合計金額:(円)</span>
+            <span id="total-value">0</span>
+        </div>
+        <br>
+        <div class="div-flex">
+        <button class="btn-save" type="button" id="calculate-total-button">合計を計算</button>
+        <button class="btn-save" type="button" id="save-button">更新</button>
+        <button class="btn-close" type="button" onclick="window.close()">タブを閉じる</button>
+        </div>
+    </form>
+    <script type="module">
+        import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+
+        // Firebaseの初期化
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5Q-33mnR0OHCIgRfsZQqhp3DtJl_HqSo",
+            authDomain: "localstorage-350f8.firebaseapp.com",
+            projectId: "localstorage-350f8",
+            storageBucket: "localstorage-350f8.appspot.com",
+            messagingSenderId: "813792564394",
+            appId: "1:813792564394:web:f0647834bbfc23e6c36cd3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // URLからidパラメータを取得
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const propertyId = getQueryParam('id');
+
+        // 合計金額を計算して表示する
+        document.getElementById("calculate-total-button").addEventListener("click", () => {
+            let totalInitial = 0;
+            const fields = [
+                "interior",
+                "fixtures",
+                "lighting",
+                "designFee",
+                "registerSystem",
+                "bWork",
+                "commonInteriorCost",
+                "siteCooperation",
+                "interiorManagement",
+                "openingPromotion",
+                "fireExtinguisher",
+                "phoneWiring",
+                "registerInline",
+                "restoration",
+                "depositInterest",
+                "storeEquipment",
+                "displaySupport",
+                "preOpeningPersonnel",
+                "recruitmentCost",
+                "openingFlyer",
+                "applicationFee",
+                "interiorConstructionExpense"
+            ];
+
+            fields.forEach(fieldId => {
+                const value = Number(document.getElementById(fieldId).value) || 0;
+                totalInitial += value;
+            });
+
+            document.getElementById("total-value").textContent = totalInitial.toLocaleString(); // カンマ区切りで表示
+            return totalInitial;
+        });
+
+        // フォームの入力をFirebaseに保存
+        document.getElementById("save-button").addEventListener("click", async () => {
+            if (confirm(`物件情報を更新しますか？`)) {
+                try {
+                    if (propertyId) {
+                        const docRef = doc(db, "properties", propertyId);
+
+                        // 更新するデータをオブジェクトにまとめる
+                        const updateData = {
+                            interior: Number(document.getElementById("interior").value),
+                            fixtures: Number(document.getElementById("fixtures").value),
+                            lighting: Number(document.getElementById("lighting").value),
+                            designFee: Number(document.getElementById("designFee").value),
+                            registerSystem: Number(document.getElementById("registerSystem").value),
+                            bWork: Number(document.getElementById("bWork").value),
+                            commonInteriorCost: Number(document.getElementById("commonInteriorCost").value),
+                            siteCooperation: Number(document.getElementById("siteCooperation").value),
+                            interiorManagement: Number(document.getElementById("interiorManagement").value),
+                            openingPromotion: Number(document.getElementById("openingPromotion").value),
+                            fireExtinguisher: Number(document.getElementById("fireExtinguisher").value),
+                            phoneWiring: Number(document.getElementById("phoneWiring").value),
+                            registerInline: Number(document.getElementById("registerInline").value),
+                            restoration: Number(document.getElementById("restoration").value),
+                            depositInterest: Number(document.getElementById("depositInterest").value),
+                            storeEquipment: Number(document.getElementById("storeEquipment").value),
+                            displaySupport: Number(document.getElementById("displaySupport").value),
+                            preOpeningPersonnel: Number(document.getElementById("preOpeningPersonnel").value),
+                            recruitmentCost: Number(document.getElementById("recruitmentCost").value),
+                            openingFlyer: Number(document.getElementById("openingFlyer").value),
+                            applicationFee: Number(document.getElementById("applicationFee").value),
+                            interiorConstructionExpense: Number(document.getElementById("interiorConstructionExpense").value),
+                            totalInitial: Number(document.getElementById("total-value").textContent.replace(/,/g, '')) // 合計金額を数値に変換して保存
+                        };
+
+                        await updateDoc(docRef, updateData);
+                        alert("データが保存されました");
+                    } else {
+                        alert("物件IDが指定されていません");
+                    }
+                } catch (error) {
+                    console.error("データの保存中にエラーが発生しました: ", error);
+                    alert("データの保存中にエラーが発生しました");
+                }
+            }
+        });
+
+        // 初期値の読み込み
+        async function loadInitialValues() {
+            try {
+                if (propertyId) {
+                    const docRef = doc(db, "properties", propertyId);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+
+                        // データが存在する場合、フォームに値を設定
+                        document.getElementById("interior").value = data.interior || 0;
+                        document.getElementById("fixtures").value = data.fixtures || 0;
+                        document.getElementById("lighting").value = data.lighting || 0;
+                        document.getElementById("designFee").value = data.designFee || 0;
+                        document.getElementById("registerSystem").value = data.registerSystem || 0;
+                        document.getElementById("bWork").value = data.bWork || 0;
+                        document.getElementById("commonInteriorCost").value = data.commonInteriorCost || 0;
+                        document.getElementById("siteCooperation").value = data.siteCooperation || 0;
+                        document.getElementById("interiorManagement").value = data.interiorManagement || 0;
+                        document.getElementById("openingPromotion").value = data.openingPromotion || 0;
+                        document.getElementById("fireExtinguisher").value = data.fireExtinguisher || 0;
+                        document.getElementById("phoneWiring").value = data.phoneWiring || 0;
+                        document.getElementById("registerInline").value = data.registerInline || 0;
+                        document.getElementById("restoration").value = data.restoration || 0;
+                        document.getElementById("depositInterest").value = data.depositInterest || 0;
+                        document.getElementById("storeEquipment").value = data.storeEquipment || 0;
+                        document.getElementById("displaySupport").value = data.displaySupport || 0;
+                        document.getElementById("preOpeningPersonnel").value = data.preOpeningPersonnel || 0;
+                        document.getElementById("recruitmentCost").value = data.recruitmentCost || 0;
+                        document.getElementById("openingFlyer").value = data.openingFlyer || 0;
+                        document.getElementById("applicationFee").value = data.applicationFee || 0;
+                        document.getElementById("interiorConstructionExpense").value = data.interiorConstructionExpense || 0;
+
+                        // 初期表示で合計金額を計算
+                        document.getElementById("calculate-total-button").click();
+                    } else {
+                        alert("データが見つかりませんでした");
+                    }
+                }
+            } catch (error) {
+                console.error("データの読み込み中にエラーが発生しました: ", error);
+                alert("データの読み込み中にエラーが発生しました");
+            }
+        }
+
+        loadInitialValues();
+    </script>
+</body>
+</html>
