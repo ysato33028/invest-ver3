@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel File Upload</title>
+</head>
+<body>
+    <h1>Excel File Upload</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if data %}
+    <h2>Extracted Data</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Keyword</th>
+                <th>Values</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for keyword, values in data.items() %}
+            <tr>
+                <td>{{ keyword }}</td>
+                <td>{{ values | join(', ') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>
