@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>まいばすけっと投資回収シミュレーション</title>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -237,6 +238,7 @@
         </tbody>
     </table>
     </form>
+    <button id="export-ppt-button" class="save">PPTエクスポート</button>
     <div class="container">
         <div class="column">
             <h2>物件検索</h2>
@@ -252,6 +254,7 @@
     </div>
     <h2>検索結果</h2>
     <ul id="property-list"></ul>
+    <script src="script.js"></script>
     <script type="module">
         // シミュレーション結果の計算処理
         document.getElementById("simulate").addEventListener("click", () => {
