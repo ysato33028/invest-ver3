@@ -9,6 +9,20 @@
 </head>
 <body>
     <h1>まいばすけっと投資回収シミュレーション</h1>
+    <button id="logout-button">
+        <img id="logout-icon" src="icon/logout.png" alt="ログアウトアイコン">
+        <span id="logout-text">ログアウト</span>
+  　</button>
+    <div class="container">
+        <div class="column">
+            <h2>エントリーシートの読み込み</h2>
+            <form id="excel-upload-form">
+                <label for="excel-file">xlsx形式をアップロード　シート名は「経営会議エントリーシート」に指定:</label>
+                <input type="file" id="excel-file" accept=".xlsx" required /><br><br>
+                <button type="submit">アップロード</button>
+            </form>
+        </div>
+    </div>
     <form id="property-form">
         <div class="container">
             <div class="column">
@@ -252,11 +266,13 @@
             <input id="list-all" type="button" value="登録一覧を表示" /></input>
         </div>
     </div>
+    <h2>物件詳細</h2>
+    <div id="property-details"></div>
     <h2>検索結果</h2>
     <ul id="property-list"></ul>
     <script src="script.js"></script>
     <script type="module">
-        // シミュレーション結果の計算処理
+    // シミュレーション結果の計算処理
         document.getElementById("simulate").addEventListener("click", () => {
         const annualSales = Number(document.getElementById("annualSales").value);
         const growthRates = [
@@ -374,6 +390,7 @@
 
       // Firebase App (必須)
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"; // Auth用
       import { getFirestore, collection, addDoc, getDocs, query, where, updateDoc, doc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
       // Firebaseの初期化
@@ -387,7 +404,26 @@
       };
 
       const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app); // Authを初期化
       const db = getFirestore(app);
+
+      // 認証状態を確認
+        onAuthStateChanged(auth, (user) => {
+          if (!user) {
+            // ログインしていない場合、login.htmlにリダイレクト
+            window.location.href = "login.html";
+          }
+        });
+
+        // ログアウトボタンの処理
+        document.getElementById("logout-button").addEventListener("click", async () => {
+          try {
+            await signOut(auth);
+            window.location.href = "login.html"; // ログアウト後にログインページにリダイレクト
+          } catch (error) {
+            console.error("ログアウトに失敗しました: ", error);
+          }
+        });
 
       // フォームの送信処理（保存）
       document.getElementById("property-form").addEventListener("submit", async (e) => {
@@ -805,11 +841,56 @@
             if (querySnapshot.empty) {
               alert("登録された物件はありません");
             } else {
+              // テーブル作成
+              const table = document.createElement("table");
+              const thead = document.createElement("thead");
+              const tbody = document.createElement("tbody");
+
+              // ヘッダーを追加（1回のみ）
+              thead.innerHTML = `
+                <tr>
+                  <th>物件名</th>
+                  <th>想定売上</th>
+                  <th>データセット</th>
+                  <th>詳細</th>
+                  <th>物件削除</th>
+                </tr>
+              `;
+              table.appendChild(thead);
+
               querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                const listItem = document.createElement("li");
-                listItem.innerHTML = `
-                  <table>
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                  <td>${data.name}</td>
+                  <td>${data.annualSales}</td>
+                  <td><button class="btn-edit" onclick="usePropertyData('${doc.id}')">使用</button></td>
+                  <td><button class="btn-detail" onclick="showPropertyDetails('${doc.id}')">詳細</button></td>
+                  <td><button class="btn-delete" onclick="deleteProperty('${doc.id}')">削除</button></td>
+                `;
+                tbody.appendChild(row);
+              });
+
+              table.appendChild(tbody);
+              propertyList.appendChild(table);
+            }
+          } catch (error) {
+            console.error("一覧の取得に失敗しました: ", error);
+          }
+        });
+
+        // 詳細データ表示の関数
+        window.showPropertyDetails = async function (docId) {
+          try {
+            const docRef = doc(db, "properties", docId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+              const data = docSnap.data();
+              // `<h2>物件詳細</h2>` の下に詳細情報を挿入
+              document.querySelector("h2").innerText = `物件詳細 - ${data.name}`;  // `h2` に物件名を追加
+              const detailTable = `
+                <table>
                     <thead>
                         <tr>
                         <th>物件名</th>
@@ -827,16 +908,87 @@
                         </tr>
                     </tbody>
                 </table>
-                `;
-                propertyList.appendChild(listItem);
-              });
+                <table>
+                  <thead>
+                    <tr>
+                      <th>項目</th>
+                      <th>1年目</th>
+                      <th>2年目</th>
+                      <th>3年目</th>
+                      <th>4年目</th>
+                      <th>5年目</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>売上編集</td>
+                      <td><button class="btn-edit" onclick="goToSales('${docId}')">初年度</button></td>
+                      <td><button class="btn-edit" onclick="goToSales2('${docId}')">2年目</button></td>
+                      <td><button class="btn-edit" onclick="goToSales3('${docId}')">3年目</button></td>
+                      <td><button class="btn-edit" onclick="goToSales4('${docId}')">4年目</button></td>
+                      <td><button class="btn-edit" onclick="goToSales5('${docId}')">5年目</button></td>
+                    </tr>
+                    <tr>
+                      <td>初期投資編集</td>
+                      <td><button class="btn-edit" onclick="goToInitial('${docId}')">一律編集</button></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>人件費編集</td>
+                      <td><button class="btn-edit" onclick="goToPersonnel('${docId}')">一律編集</button></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>販促費編集</td>
+                      <td><button class="btn-edit" onclick="goToPromotion('${docId}')">初年度</button></td>
+                      <td><button class="btn-edit" onclick="goToPromotion2('${docId}')">2年目</button></td>
+                      <td><button class="btn-edit" onclick="goToPromotion3('${docId}')">3年目</button></td>
+                      <td><button class="btn-edit" onclick="goToPromotion4('${docId}')">4年目</button></td>
+                      <td><button class="btn-edit" onclick="goToPromotion5('${docId}')">5年目</button></td>
+                    </tr>
+                    <tr>
+                      <td>設備費編集</td>
+                      <td><button class="btn-edit" onclick="goToEquipment('${docId}')">初年度</button></td>
+                      <td><button class="btn-edit" onclick="goToEquipment2('${docId}')">2年目</button></td>
+                      <td><button class="btn-edit" onclick="goToEquipment3('${docId}')">3年目</button></td>
+                      <td><button class="btn-edit" onclick="goToEquipment4('${docId}')">4年目</button></td>
+                      <td><button class="btn-edit" onclick="goToEquipment5('${docId}')">5年目</button></td>
+                    </tr>
+                    <tr>
+                      <td>一般費編集</td>
+                      <td><button class="btn-edit" onclick="goToGeneral('${docId}')">初年度</button></td>
+                      <td><button class="btn-edit" onclick="goToGeneral2('${docId}')">2年目</button></td>
+                      <td><button class="btn-edit" onclick="goToGeneral3('${docId}')">3年目</button></td>
+                      <td><button class="btn-edit" onclick="goToGeneral4('${docId}')">4年目</button></td>
+                      <td><button class="btn-edit" onclick="goToGeneral5('${docId}')">5年目</button></td>
+                    </tr>
+                    <tr>
+                      <td>月度別計画</td>
+                      <td><button class="btn-edit" onclick="goToMonthly('${docId}')">初年度</button></td>
+                      <td><button class="btn-edit" onclick="goToMonthly2('${docId}')">2年目</button></td>
+                      <td><button class="btn-edit" onclick="goToMonthly3('${docId}')">3年目</button></td>
+                      <td><button class="btn-edit" onclick="goToMonthly4('${docId}')">4年目</button></td>
+                      <td><button class="btn-edit" onclick="goToMonthly5('${docId}')">5年目</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              `;
+              document.getElementById("property-details").innerHTML = detailTable;
+            } else {
+              alert("詳細情報が見つかりません");
             }
           } catch (error) {
-            console.error("一覧の取得に失敗しました: ", error);
+            console.error("詳細表示に失敗しました: ", error);
           }
-        });
+        }
 
-          // 物件を削除する関数
+        // 物件を削除する関数
         window.deleteProperty = async function(docId) {
           if (confirm("本当に削除しますか？")) {
             try {
@@ -953,6 +1105,81 @@
             console.error("データの取得に失敗しました: ", error);
          }
         }
+
+        // Excelファイルのデータ取り込み
+        document.getElementById('excel-upload-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fileInput = document.getElementById('excel-file');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Excelファイルを選択してください");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async function (event) {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            
+            // シート「経営会議エントリーシート」を選択
+            const sheet = workbook.Sheets["経営会議エントリーシート"];
+            
+            // D5セルから物件名を取得
+            const cell = sheet['D5'];
+            const name = cell ? cell.v : "";
+
+            // Firebaseに保存
+            if (name) {
+                try {
+                    // 既存の物件名があるかチェック
+                    const propertiesRef = collection(db, "properties");
+                    const q = query(propertiesRef, where("name", "==", name));
+                    const querySnapshot = await getDocs(q);
+
+                    if (!querySnapshot.empty) {
+                        // 物件名がすでに存在する場合、上書きするか確認
+                        if (confirm("同じ物件名で登録されています。上書きしてもいいですか？")) {
+                            // 上書き処理
+                            const docId = querySnapshot.docs[0].id;
+                            const docRef = doc(db, "properties", docId);
+
+                            // 上書きするデータをここに指定
+                            await updateDoc(docRef, {
+                                // 他のフィールドもここで追加
+                            });
+
+                            alert("データが上書きされました");
+
+                            // フォームに反映
+                            document.getElementById('name').value = name;
+                        }
+                    } else {
+                        // 新規登録
+                        await addDoc(propertiesRef, {
+                            name: name,
+                            // 他のフィールドもここで追加
+                        });
+
+                        alert("データが保存されました");
+
+                        // フォームに反映
+                        document.getElementById('name').value = name;
+                    }
+                } catch (error) {
+                    console.error("エラーが発生しました: ", error);
+                    alert("データの保存に失敗しました");
+                }
+            } else {
+                alert("物件名が見つかりませんでした");
+            }
+        };
+
+        reader.readAsArrayBuffer(file);
+    });
 </script>
+<!-- Excel用SheetJSのライブラリ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </body>
 </html>
